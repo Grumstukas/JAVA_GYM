@@ -1,8 +1,8 @@
 import java.io.*;
-        import java.time.LocalDateTime;
-        import java.time.format.DateTimeFormatter;
-        import java.util.Arrays;
-        import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Client {
     private String name;
@@ -42,7 +42,10 @@ public class Client {
         double kmi = Math.round((mass / Math.pow(height / 100, 2)) * 100) / 100D;
         return kmi;
     }
-/**fills  uniqe client files, and all clients files*/
+
+    /**
+     * fills  uniqe client files, and all clients files
+     */
     public static void RegisterClientToFile(String name, double height, double mass) {
         FileWriter fw = null;
         File file = null;
@@ -60,7 +63,7 @@ public class Client {
             }
             fw = new FileWriter(file, true);
             fw.write(individualInput);
-            fw.write(System.getProperty( "line.separator" ));
+            fw.write(System.getProperty("line.separator"));
             fw.flush();
             fw.close();
         } catch (IOException e) {
@@ -73,7 +76,7 @@ public class Client {
             }
             registration = new FileWriter(allClients, true);
             registration.write(registrationInput);
-            registration.write(System.getProperty( "line.separator" ));
+            registration.write(System.getProperty("line.separator"));
             registration.flush();
             registration.close();
         } catch (IOException e) {
@@ -94,34 +97,33 @@ public class Client {
 
 
 
+
+
+
+
+
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public double getMass() {
         return mass;
     }
-
     public void setMass(double mass) {
         this.mass = mass;
     }
-
     public double getHeight() {
         return height;
     }
-
     public void setHeight(double height) {
         this.height = height;
     }
-
     public String getClientID() {
         return clientID;
     }
-
     public void setClientID(String clientID) {
         this.clientID = clientID;
     }

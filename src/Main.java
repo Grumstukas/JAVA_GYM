@@ -14,11 +14,10 @@ public class Main {
         System.out.println("hello");
 
         hello(clients, clientsCount);
-        clients[0].RegisterClientToFile(clients[0].getName(),clients[0].getHeight(),clients[0].getMass());
-        clients[1].RegisterClientToFile(clients[1].getName(),clients[1].getHeight(),clients[1].getMass());
+        clients[0].RegisterClientToFile(clients[0].getName(), clients[0].getHeight(), clients[0].getMass());
+        clients[1].RegisterClientToFile(clients[1].getName(), clients[1].getHeight(), clients[1].getMass());
         clients[0].readFile();
         readFileWithScanner(clientsCount);
-        System.out.println("all clients = "+clientsCount);
 
     }
 
@@ -39,7 +38,7 @@ public class Main {
                     System.out.println("That's not a choice");
             }
         } catch (InputMismatchException ex) {
-            System.out.println("That's not a choice"+ex);
+            System.out.println("That's not a choice" + ex);
         }
     }
 
@@ -75,28 +74,28 @@ public class Main {
         return clientsCount;
     }
 
-    public static int readFileWithScanner(int clientsCount){
+    public static int readFileWithScanner(int clientsCount) {
         clientsCount = 0;
         List<String> allClients = new ArrayList<String>();
         List<String> filteredClients = new ArrayList<String>();
         File fileForRead = new File("clients\\all_clients.txt");
-        try(Scanner scanner = new Scanner(fileForRead)){
-            while(scanner.hasNextLine()){
+        try (Scanner scanner = new Scanner(fileForRead)) {
+            while (scanner.hasNextLine()) {
                 allClients.add(scanner.next());
                 scanner.nextLine();
                 clientsCount = allClients.size();
             }
-        }catch (IOException ex){
+        } catch (IOException ex) {
             System.out.println(ex);
         }
-        for (String client:allClients){
-            if (!filteredClients.contains(client)){
+        for (String client : allClients) {
+            if (!filteredClients.contains(client)) {
                 filteredClients.add(client);
             }
         }
         clientsCount = filteredClients.size();
         System.out.println(filteredClients.toString());
-        System.out.println("all clients = "+clientsCount);
+        System.out.println("all clients = " + clientsCount);
         return clientsCount;
     }
 }
