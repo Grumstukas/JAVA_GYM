@@ -22,16 +22,15 @@ public class NewGymClient {
 
         System.out.print("telefono numeris: \t\t|\t");
         setPhoneNumber(input.next());
-
+/*************/
         System.out.print("elektroninis pastas: \t|\t");
-        String email = input.next();
         try {
+            String email = input.next();
             setEmail(email);
-        }catch (NullPointerException ex){
-            setEmail("no email");
+        } catch (NullPointerException ex) {
+            System.out.println("INVALID"); //print invalid
         }
-
-
+/*************/
         System.out.print("kuno mase (kg): \t\t\t|\t");
         setClientWeight(input.nextDouble());
 
@@ -43,7 +42,12 @@ public class NewGymClient {
         this.phoneNumber = phoneNumber;
     }
     public void setEmail(String email) {
-        this.email = email;
+        if (email.equals("")){
+            this.email = "no email";
+        }else {
+            this.email = email;
+        }
+
     }
     public void setClientWeight(double clientWeight) {
         this.clientWeight = clientWeight;
