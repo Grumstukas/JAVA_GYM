@@ -3,7 +3,7 @@ package Gym2;
 import java.util.Scanner;
 
 public class Main {
-    protected static GymClient sportsman;
+    protected static NewGymClient sportsman;
 
     public static void main(String[] args) {
     String sportsmanName;
@@ -12,7 +12,7 @@ public class Main {
         System.out.print("Hello, what's your name?\t|\t");
         sportsmanName = input.next();
 
-        sportsman = new GymClient(sportsmanName);
+        sportsman = new NewGymClient(sportsmanName);
         options();
     }
 

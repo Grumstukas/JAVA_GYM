@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GymClient {
+public class NewGymClient {
     protected String clientName;
+    protected String phoneNumber;
+    protected String email;
     protected double clientWeight;
     protected double clientHeight;
     protected double clientBMI;
 
-    public GymClient(String clientName) {
+    public NewGymClient(String clientName) {
         this.clientName = clientName;
     }
     public void setClientWeight(double clientWeight) {
@@ -27,6 +29,13 @@ public class GymClient {
     public void setClientBMI(double clientBMI) {
         this.clientBMI = clientBMI;
     }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getClientName() {
         return clientName;
     }
@@ -128,5 +137,8 @@ public class GymClient {
 
         System.out.println("Training started at: "+clientProgress.get(0));
         System.out.println("Gym was visited "+clientProgress.size()+" times");
+    }
+
+    public void setClientName(String next) {
     }
 }
