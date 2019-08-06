@@ -1,13 +1,8 @@
 package Gym3;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class NewGymClient implements ClientInterface {
+public class NewGymClient extends ClientMethods {
     protected String clientID;
     protected String clientName;
     protected String clientSurname;
@@ -49,11 +44,13 @@ public class NewGymClient implements ClientInterface {
         setClientHeight(input.nextDouble());
 
         newID();
+        setClientBMI(calcBMI(clientWeight, clientHeight/100));
         String clientPath = "All_Clients\\"+getClientID()+".txt";
-        String clientInfo = clientName +"\t|\t" + clientSurname+"\t|\t"+ phoneNumber +"\t|\t"+ email +"\t|\t"+ clientWeight +"\t|\t"+ clientHeight +"\t|\t"+ clientBMI;
+        String clientInfo = clientName +"\t|\t" + clientSurname+
+                "\t|\t"+ phoneNumber +"\t|\t"+ email +"\t|\t"+ clientWeight +"\t|\t"+ clientHeight +"\t|\t"+ (clientBMI/100)*100D;
 
-        writeClientInfoToFile(clientInfo, clientPath);
-
+        writeClientInfoToFile(clientInfo, clientPath);//asmrenine
+        writeClientInfoToFile(clientInfo, "All_Clients\\All.txt");
         System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
                 "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
     }
@@ -106,60 +103,4 @@ public class NewGymClient implements ClientInterface {
         return clientID;
     }
 
-    /**
-     * This method lets Client object to push all its information to registatation file.
-     */
-    @Override
-    public void writeClientInfoToFile(String clientInfo, String clientPath) {
-        FileWriter registration = null;
-        File allClients = null;
-//        String registrationInput = clientName;
-//        String pathNameAllClient = "clients\\all_clients.txt";
-        try {
-            allClients = new File(clientPath);
-            if (!allClients.exists()) {
-                allClients.createNewFile();
-            }
-            if (readFile(clientPath, clientInfo) == false) {
-                registration = new FileWriter(allClients, true);
-                registration.write(clientInfo);
-                registration.write(System.getProperty("line.separator"));
-                registration.flush();
-                registration.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * This method lets read file and get
-     * @param pathToReed
-     */
-    @Override
-    public boolean readFile(String pathToReed, String clientInfo) {
-        boolean newLineInClientBook = false;
-        List<String> allClients = new ArrayList<String>();
-//        File fileForRead = new File("clients\\all_clients.txt");
-        File fileForRead = new File(pathToReed);
-        try (Scanner scanner = new Scanner(fileForRead)) {
-            while (scanner.hasNextLine()) {
-                allClients.add(scanner.next());
-                scanner.nextLine();
-            }
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-        for (int i = 0; i<allClients.size(); i++){
-            if (allClients.size()==0){
-                newLineInClientBook = true;
-            }
-            else if (!allClients.contains(clientInfo)){
-                newLineInClientBook = false;
-            }else {
-                newLineInClientBook = true;
-            }
-        }
-        return newLineInClientBook;
-    }
 }
