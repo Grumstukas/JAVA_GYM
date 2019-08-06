@@ -1,17 +1,15 @@
 package Gym3;
 
-import Gym3.NewGymClient;
-
 import java.util.Scanner;
 
 public class Main {
     protected static NewGymClient sportsman;
 
     public static void main(String[] args) {
-    String sportsmanName;
+        String sportsmanName;
 
         Scanner input = new Scanner(System.in);
-        System.out.print("Kuo jus vardu?\t\t\t|\t");
+        System.out.print("Kuo jus vardu?\t\t\t\t|\t");
         sportsmanName = input.next();
 
         sportsman = new NewGymClient(sportsmanName);

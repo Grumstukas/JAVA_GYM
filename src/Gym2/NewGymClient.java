@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NewGymClient {
-    protected String clientName;
-    protected String phoneNumber;
-    protected String email;
-    protected double clientWeight;
-    protected double clientHeight;
-    protected double clientBMI;
+    private String clientName;
+    private String phoneNumber;
+    private String email;
+    private double clientWeight;
+    private double clientHeight;
+    private double clientBMI;
 
     public NewGymClient(String clientName) {
         this.clientName = clientName;
