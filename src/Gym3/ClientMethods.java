@@ -4,7 +4,12 @@ import java.io.*;
 import java.util.*;
 
 public class ClientMethods {
-
+    /**
+     * counts client BMI
+     * @param Weight
+     * @param Height
+     * @return - BMI + recomendations
+     */
     public static double calcBMI (double Weight, double Height) {
         double BMI = Weight / (Height * Height);
         System.out.println();
@@ -24,6 +29,11 @@ public class ClientMethods {
         return BMI;
     }
 
+    /**
+     * writes information to file
+     * @param clientInfo information that needs to be written
+     * @param clientPath path to file that information must be written in
+     */
     public void writeClientInfoToFile(String clientInfo, String clientPath) {
         FileWriter registration = null;
         File allClients = null;
@@ -44,10 +54,15 @@ public class ClientMethods {
         }
     }
 
+    /**
+     * reads given file line by line, pushes all lines to list, and then searches in that list of uneque line
+     * @param pathToReed
+     * @param clientInfo
+     * @return
+     */
     public boolean readFile(String pathToReed, String clientInfo) {
         boolean newLineInClientBook = false;
         List<String> allClients = new ArrayList<String>();
-//        File fileForRead = new File("clients\\all_clients.txt");
         File fileForRead = new File(pathToReed);
         try (Scanner scanner = new Scanner(fileForRead)) {
             while (scanner.hasNextLine()) {
