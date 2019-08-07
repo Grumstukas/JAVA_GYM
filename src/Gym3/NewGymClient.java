@@ -38,8 +38,9 @@ public class NewGymClient {
 
         setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
         String clientPath = "All_Clients\\" + getClientID() + ".csv";
-        String clientInfo = clientName + "\t|\t" + clientSurname +
+        String clientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname +
                 "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
+
 
         Write_Read_File.writeClientInfoToFile(clientInfo, clientPath); // personal
         Write_Read_File.writeClientInfoToFile(clientInfo, "All_Clients\\All.csv");

@@ -12,7 +12,7 @@ public class Main {
      */
     public static void newOrExistingUser() {
         try (Scanner scan = new Scanner(System.in)) {
-            System.out.println("Good day!");
+            System.out.print("Sveiki !");
             System.out.println();
             System.out.println("1. Press ' 1 ' if you want to register.");
             System.out.println("2. Press ' 2 ' if you are an existing user.");
@@ -20,11 +20,21 @@ public class Main {
             switch (userInput) {
                 case 1:
                     System.out.println("I call Toma, dialing..");
-                    NewGymClient client = new NewGymClient();
-                    client.takeInfo();
+                    NewGymClient clientNew = new NewGymClient();
+                    clientNew.takeInfo();
                     break;
                 case 2:
-                    System.out.println("I call Oksana, dialing.. Woops, no answer here!");
+                    System.out.print("Sveiki, malonu kad sportojate JAVA GYM :)\n" +
+                            "Prašom pateikti informacija reikalinga duomenu atnaujinimui.\n");
+                    System.out.print("Iveskit savo ID numeri:\t");
+                    String userID = scan.next();
+                    if (Write_Read_File.readFile( "All_Clients\\All.csv", userID)){
+                        System.out.println("labas kakzas....");
+                        OldGymClient clientOld = new OldGymClient(userID);
+                        clientOld.updateInfo();
+                    }else{
+                        System.out.println("go to Toma");
+                    }
                     break;
                 default:
                     System.out.println("Error, time to die. Re-run the program.");
@@ -36,37 +46,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         newOrExistingUser();
-
     }
-//        private static void options() {
-//            int choice;
-//            Scanner input = new Scanner(System.in);
-//            System.out.println("press 1 to collect info about you");
-//            System.out.println("press 2 to get your activity and progress info");
-//            System.out.println("press 3 to get your friend activity and progress info");
-//            System.out.println("press 4 to sign out");
-//            choice = input.nextInt();
-//            switch (choice){
-//                case 1:
-//                    sportsman.takeInfo();
-////                    takeInfo();
-////                    sportsman.writeToFile();
-////                    sportsman.writeToClientBook();
-//                    options();
-//                    break;
-//                case 2:
-//                    System.out.println("wait....");
-//                    break;
-//                case 3:
-//                    System.out.println("wait....");
-//                    break;
-//                case 4:
-//                    System.out.println("wait....");
-//                    break;
-//                    default:
-//            }
-//
-//        }
+
 }
