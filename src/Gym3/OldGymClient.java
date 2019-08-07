@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class OldGymClient extends ClientMethods {
+public class OldGymClient{
     protected String clientID;
     protected int clientActivity;
     protected double clientWeight;
