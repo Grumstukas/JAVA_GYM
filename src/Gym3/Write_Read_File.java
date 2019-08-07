@@ -17,9 +17,13 @@ public class Write_Read_File {
     public static void writeClientInfoToFile(String clientInfo, String clientPath) {
         FileWriter registration = null;
         File allClients = null;
+
+        File newDirectory = new File("All_Clients");
+        boolean check = newDirectory.mkdir();
         try {
             allClients = new File(clientPath);
             if (!allClients.exists()) {
+
                 allClients.createNewFile();
             }
             if (readFile(clientPath, clientInfo) == false) {

@@ -14,38 +14,33 @@ public class NewGymClient {
     private double clientBMI;
 
     /**
-     * Constructor contains only client name
-     *
-     * @param clientName
-     */
-    public NewGymClient(String clientName) {
-        this.clientName = clientName;
-    }
-
-    /**
      * This method asks of all other parameters that client must have.
      */
     void takeInfo() {
         try (Scanner input = new Scanner(System.in)) {
+            System.out.print("Kuo jus vardu?\t\t\t\t|\t");
+            clientName = input.next();
             System.out.print("Kokia Jusu pavarde?\t|\t");
-            setClientSurname(input.next());
+            clientSurname = input.next();
             System.out.println("Prasau pateikite informacija reikalinga registracijos ivykdymui");
             System.out.print("telefono numeris: \t\t|\t");
-            setPhoneNumber(input.next());
+            phoneNumber = input.next();
             System.out.print("elektroninis pastas: \t|\t");
-            setEmail(input.next());
+            email = input.next();
             System.out.print("kuno mase (kg): \t\t\t|\t");
-            setClientWeight(input.nextDouble());
+            clientWeight = input.nextDouble();
             System.out.print("kuno ugis(cm): \t\t\t|\t");
-            setClientHeight(input.nextDouble());
+            clientHeight = input.nextDouble();
         } catch (Exception e) {
             System.out.print("Error, time to die. Re-run the program.");
         }
-        newID();
+        setClientID(ID_Generator.newID(clientName, clientSurname));
+
         setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
         String clientPath = "All_Clients\\" + getClientID() + ".csv";
         String clientInfo = clientName + "\t|\t" + clientSurname +
                 "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
+
         Write_Read_File.writeClientInfoToFile(clientInfo, clientPath); // personal
         Write_Read_File.writeClientInfoToFile(clientInfo, "All_Clients\\All.csv");
         System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
@@ -55,10 +50,6 @@ public class NewGymClient {
     /**
      * This method generates unique Client ID TODO    ID validation
      */
-    void newID() {
-        String ID = getClientName().substring(0, 1) + "" + getClientSurname().substring(0, 1) + "" + (int) Math.floor(Math.random() * 999);
-        setClientID(ID);
-    }
 
     public void setClientSurname(String clientSurname) {
         this.clientSurname = clientSurname;
