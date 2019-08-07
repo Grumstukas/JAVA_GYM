@@ -10,7 +10,7 @@ public class BMICalc {
      * @return - BMI + recommendations
      */
     public static double calcBMI(double Weight, double Height) {
-        double BMI = Weight / (Height * Height);
+        double BMI = Weight / Math.pow(Height/100,2);
         System.out.println();
         System.out.format("Your body mass index is - " + "%.2f%n", BMI);
         if (BMI < 18.5) {
@@ -25,7 +25,7 @@ public class BMICalc {
         if (30 <= BMI) {
             System.out.println("BMI is much higher than normal, visiting nutritionist is highly recommended, weakened gym program recommended.");
         }
-        return BMI;
+        return  (double) Math.round(BMI * 100) / 100;
     }
 }
 

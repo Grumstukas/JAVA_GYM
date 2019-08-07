@@ -16,18 +16,18 @@ public class Write_Read_File {
      */
     public static void writeClientInfoToFile(String clientInfo, String clientPath) {
         FileWriter registration = null;
-        File allClients = null;
+        File allThisFileLines = null;
 
         File newDirectory = new File("All_Clients");
         boolean check = newDirectory.mkdir();
         try {
-            allClients = new File(clientPath);
-            if (!allClients.exists()) {
+            allThisFileLines = new File(clientPath);
+            if (!allThisFileLines.exists()) {
 
-                allClients.createNewFile();
+                allThisFileLines.createNewFile();
             }
             if (readFile(clientPath, clientInfo) == false) {
-                registration = new FileWriter(allClients, true);
+                registration = new FileWriter(allThisFileLines, true);
                 registration.write(clientInfo);
                 registration.write(System.getProperty("line.separator"));
                 registration.flush();
@@ -47,25 +47,78 @@ public class Write_Read_File {
      */
     public static boolean readFile(String pathToReed, String clientInfo) {
         boolean newLineInClientBook = false;
-        List<String> allClients = new ArrayList<String>();
+        List<String> allThisFileLines = new ArrayList<String>();
         File fileForRead = new File(pathToReed);
         try (Scanner scanner = new Scanner(fileForRead)) {
             while (scanner.hasNextLine()) {
-                allClients.add(scanner.next());
+                allThisFileLines.add(scanner.next());
                 scanner.nextLine();
             }
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        for (int i = 0; i < allClients.size(); i++) {
-            if (allClients.size() == 0) {
+        for (int i = 0; i < allThisFileLines.size(); i++) {
+            if (allThisFileLines.size() == 0) {
                 newLineInClientBook = true;
-            } else if (!allClients.contains(clientInfo)) {
+            } else if (!allThisFileLines.contains(clientInfo)) {
                 newLineInClientBook = false;
             } else {
                 newLineInClientBook = true;
             }
         }
         return newLineInClientBook;
+    }
+
+    /**
+     * metodas skaito tik iš pirmos eilutes
+     * @param pathToReed skaitomo failo adresas
+     * @param index ieskomo dalyko eiles numeris (toje pirmoje eileje)
+     * @return stringo tipo ieskomo parametro vertę.
+     */
+    public static String findSomething (String pathToReed, int index) {
+        List<String> allThisFileLines = new ArrayList<String>();
+        File fileForRead = new File(pathToReed);
+        try (Scanner scanner = new Scanner(fileForRead)) {
+            while (scanner.hasNextLine()) {
+                allThisFileLines.add(scanner.nextLine());
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        String firstLine =  allThisFileLines.get(0);
+        String existingClientHeights [] = firstLine.split("\t|\t");
+        return existingClientHeights [index];
+    }
+
+    /**
+     * Metodas skaito visa faila po eilute
+     * @param pathToReed skaitomo failo adresas
+     * @param index ieskomo dalyko eiles numeris
+     * @param thatSomething stringo tipo ieskomas dalykas
+     * @return boolean True- jeigu rado, false- jei nerado.
+     */
+    public static boolean findSomethingInAllFile (String pathToReed, int index, String thatSomething) {
+        boolean found = false;
+        List<String> allThisFileLines = new ArrayList<>();
+        List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>();
+        File fileForRead = new File(pathToReed);
+        try (Scanner scanner = new Scanner(fileForRead)) {
+            while (scanner.hasNextLine()) {
+                allThisFileLines.add(scanner.nextLine());
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
+        for (int i = 0; i<allThisFileLines.size(); i++){
+            String line[] = allThisFileLines.get(i).split("\t|\t");
+            ListOfThingtsThatYouAreLookingFor.add(line[index]);
+        }
+        if (ListOfThingtsThatYouAreLookingFor.size()>0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething)){
+            found = true;
+        }else {
+            found = false;
+        }
+        return found;
     }
 }

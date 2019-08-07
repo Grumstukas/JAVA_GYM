@@ -1,7 +1,5 @@
 package Gym3;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class NewGymClient {
@@ -28,7 +26,7 @@ public class NewGymClient {
             System.out.print("telefono numeris: \t\t|\t");
             phoneNumber = input.next();
             System.out.print("elektroninis pastas: \t|\t");
-            email = input.next();
+            email =  input.next();
             System.out.print("kuno mase (kg): \t\t\t|\t");
             clientWeight = input.nextDouble();
             System.out.print("kuno ugis(cm): \t\t\t|\t");
@@ -36,29 +34,27 @@ public class NewGymClient {
         } catch (Exception e) {
             System.out.print("Error, time to die. Re-run the program.");
         }
-        setClientID(ID_Generator.newID(clientName, clientSurname));
 
-        setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
-        String clientPath = "All_Clients\\" + getClientID() + ".csv";
-        String newClientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname +
-                "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
-        String personalClientInfo = clientID +"\t|\t" +currentTime()+"\t|\t" + "dar nesportavo"+ "\t|\t" + clientWeight +"\t|\t" + clientHeight +"\t|\t" + (clientBMI / 100) * 100D;
+        if(!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 8, email)){
+            setClientID(ID_Generator.newID(clientName, clientSurname));
+
+            setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
+            String clientPath = "All_Clients\\" + getClientID() + ".csv";
+            String newClientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname +
+                    "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
+
+            String personalClientInfo = clientID +"\t|\t" +CurrentDate.currentTime() +"\t|\t" + clientHeight+"\t|\t" + "dar nesportavo"+ "\t|\t" + clientWeight +"\t|\t" + clientBMI +"\t|\t" + clientName;
 
 
-        Write_Read_File.writeClientInfoToFile(personalClientInfo, clientPath); // personal
-        Write_Read_File.writeClientInfoToFile(newClientInfo, "All_Clients\\All.csv");
-        System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
-                "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
+            Write_Read_File.writeClientInfoToFile(personalClientInfo, clientPath); // personal
+            Write_Read_File.writeClientInfoToFile(newClientInfo, "All_Clients\\All.csv");
+            System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
+                    "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
+        }else {
+            System.out.print("Tokiu pastu klientas jau yra uzregistruotas, prasome patikslinti visa registracijos informacija.");
+        }
+
     }
-    public String currentTime(){
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
-    }
-    /**
-     * This method generates unique Client ID TODO    ID validation
-     */
 
     public void setClientSurname(String clientSurname) {
         this.clientSurname = clientSurname;
