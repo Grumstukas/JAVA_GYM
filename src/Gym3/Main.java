@@ -20,7 +20,8 @@ public class Main {
             switch (userInput) {
                 case 1:
                     System.out.println("I call Toma, dialing..");
-                    newUser();
+                    NewGymClient client = new NewGymClient();
+                    client.takeInfo();
                     break;
                 case 2:
                     System.out.println("I call Oksana, dialing.. Woops, no answer here!");
@@ -31,21 +32,6 @@ public class Main {
             }
         } catch (Exception e) {
             System.out.println("Error, time to die. Re-run the program.");
-        }
-    }
-
-    /**
-     * This method asking for a user name and directs to another method, which continues registering new JavaGym user.
-     */
-
-    public static void newUser() {
-        try (Scanner input = new Scanner(System.in);) {
-            System.out.print("Kuo jus vardu?\t\t\t\t|\t");
-            String sportsmanName = input.next();
-            NewGymClient sportsman = new NewGymClient(sportsmanName);
-            sportsman.takeInfo();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
