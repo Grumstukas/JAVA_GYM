@@ -2,15 +2,16 @@ package Gym3;
 
 import java.util.Scanner;
 
-public class NewGymClient extends ClientMethods {
-    protected String clientID;
-    protected String clientName;
-    protected String clientSurname;
-    protected String phoneNumber;
-    protected String email;
-    protected double clientWeight;
-    protected double clientHeight;
-    protected double clientBMI;
+public class NewGymClient {
+
+    private String clientID;
+    private String clientName;
+    private String clientSurname;
+    private String phoneNumber;
+    private String email;
+    private double clientWeight;
+    private double clientHeight;
+    private double clientBMI;
 
     /**
      * Constructor contains only client name
@@ -22,35 +23,31 @@ public class NewGymClient extends ClientMethods {
     }
 
     /**
-     * method asks of all other parameters that client must have
+     * This method asks of all other parameters that client must have.
      */
     void takeInfo() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Kokia Jusu pavarde?\t|\t");
-        setClientSurname(input.next());
-
-        System.out.println("Prasau pateikite informacija reikalinga registracijos ivykdymui");
-
-        System.out.print("telefono numeris: \t\t|\t");
-        setPhoneNumber(input.next());
-
-        System.out.print("elektroninis pastas: \t|\t");
-        setEmail(input.next());
-
-        System.out.print("kuno mase (kg): \t\t\t|\t");
-        setClientWeight(input.nextDouble());
-
-        System.out.print("kuno ugis(cm): \t\t\t|\t");
-        setClientHeight(input.nextDouble());
-
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.print("Kokia Jusu pavarde?\t|\t");
+            setClientSurname(input.next());
+            System.out.println("Prasau pateikite informacija reikalinga registracijos ivykdymui");
+            System.out.print("telefono numeris: \t\t|\t");
+            setPhoneNumber(input.next());
+            System.out.print("elektroninis pastas: \t|\t");
+            setEmail(input.next());
+            System.out.print("kuno mase (kg): \t\t\t|\t");
+            setClientWeight(input.nextDouble());
+            System.out.print("kuno ugis(cm): \t\t\t|\t");
+            setClientHeight(input.nextDouble());
+        } catch (Exception e) {
+            System.out.print("Error, time to die. Re-run the program.");
+        }
         newID();
-        setClientBMI(calcBMI(clientWeight, clientHeight/100));
-        String clientPath = "All_Clients\\"+getClientID()+".txt";
-        String clientInfo = clientName +"\t|\t" + clientSurname+
-                "\t|\t"+ phoneNumber +"\t|\t"+ email +"\t|\t"+ clientWeight +"\t|\t"+ clientHeight +"\t|\t"+ (clientBMI/100)*100D;
-
-        writeClientInfoToFile(clientInfo, clientPath);//asmrenine
-        writeClientInfoToFile(clientInfo, "All_Clients\\All.txt");
+        setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
+        String clientPath = "All_Clients\\" + getClientID() + ".csv";
+        String clientInfo = clientName + "\t|\t" + clientSurname +
+                "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
+        Write_Read_File.writeClientInfoToFile(clientInfo, clientPath); // personal
+        Write_Read_File.writeClientInfoToFile(clientInfo, "All_Clients\\All.csv");
         System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
                 "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
     }
@@ -102,5 +99,4 @@ public class NewGymClient extends ClientMethods {
     public String getClientID() {
         return clientID;
     }
-
 }
