@@ -3,12 +3,13 @@ package Gym3;
 import java.util.Scanner;
 
 public class OldGymClient{
-    protected String clientID;
-    protected int clientActivity;
-    protected double clientWeight;
-    // TrainingMachines; ??? List
-    protected double clientHeight;
-    protected double clientBMI;
+	
+    private String clientID;
+    private int clientActivity;
+    private double clientWeight;
+    // TrainingMachines; ??? List // ENUM
+    private double clientHeight;
+    private double clientBMI;
 
     public OldGymClient(String clientID) {
         this.clientID = clientID;
@@ -17,16 +18,16 @@ public class OldGymClient{
     void updateInfo() {
         Scanner input = new Scanner(System.in);
         System.out.print("Prasom iveskit aktyvumo laika JAVA GYM (min):\t");
-        setClientActivity(input.nextInt());
+        clientActivity = input.nextInt();
         System.out.print("Prasom iveskit savo kuno svori (kg):\t");
-        setClientWeight(input.nextDouble());
+        clientWeight = input.nextDouble();
 
         String clientPath = "All_Clients\\" + getClientID() + ".csv";
-        setClientHeight(Double.parseDouble(Write_Read_File.findSomething (clientPath,4)));
-        setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
+        clientHeight = Double.parseDouble(Write_Read_File.findSomething (clientPath, 4)); // 4 vietoje sedi ugis.
+        clientBMI = BMICalc.calcBMI(clientWeight, clientHeight); 
 
-        String clientInfo = clientID +"\t|\t" +CurrentDate.currentTime() +"\t|\t" + clientHeight+"\t|\t" + clientActivity+ "\t|\t" + clientWeight +"\t|\t" + clientBMI;
-        Write_Read_File.writeClientInfoToFile(clientInfo, clientPath); // personal
+        String clientInfo = clientID +"\t|\t" + CurrentDate.currentTime() +"\t|\t" + clientHeight + "\t|\t" + clientActivity + "\t|\t" + clientWeight + "\t|\t" + clientBMI;
+        Write_Read_File.writeClientInfoToFile(clientInfo, clientPath); // i asmenini faila nauja eilute po aktyvumo atnaujinimo.
     }
 
 

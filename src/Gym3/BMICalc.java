@@ -9,7 +9,7 @@ public class BMICalc {
      * @param Height
      * @return - BMI + recommendations
      */
-    public static double calcBMI(double Weight, double Height) { // Angry Code Bat
+    public static double calcBMI(double Weight, double Height) {
         double BMI = Weight / Math.pow(Height/100,2);
         System.out.println();
         System.out.format("Your body mass index is - " + "%.2f%n", BMI);

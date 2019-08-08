@@ -35,19 +35,20 @@ public class NewGymClient {
             System.out.print("Error, time to die. Re-run the program.");
         }
 
-        if(!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 8, email)){
+        if(!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 8, email)){ // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
             setClientID(ID_Generator.newID(clientName, clientSurname));
 
-            setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight));
-            String clientPath = "All_Clients\\" + getClientID() + ".csv";
-            String newClientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname +
-                    "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + (clientBMI / 100) * 100D;
+            setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight)); // FALSE, tesia registracija, skaiciuoja BMI
+            String clientPath = "All_Clients\\" + getClientID() + ".csv"; // sukuria asmenini faila 
+            String newClientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname + // formatas kaip irasyti duomenis i BENDRA faila.
+                    "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + clientBMI;
 
-            String personalClientInfo = clientID +"\t|\t" +CurrentDate.currentTime() +"\t|\t" + clientHeight+"\t|\t" + "dar nesportavo"+ "\t|\t" + clientWeight +"\t|\t" + clientBMI +"\t|\t" + clientName;
+            String personalClientInfo = clientID +"\t|\t" + CurrentDate.currentTime() +"\t|\t" + 
+            clientHeight+"\t|\t" + "dar nesportavo"+ "\t|\t" + clientWeight +"\t|\t" + clientBMI +"\t|\t" + clientName; // iraso duomenis i ASMENINI faila.
 
 
             Write_Read_File.writeClientInfoToFile(personalClientInfo, clientPath); // personal
-            Write_Read_File.writeClientInfoToFile(newClientInfo, "All_Clients\\All.csv");
+            Write_Read_File.writeClientInfoToFile(newClientInfo, "All_Clients\\All.csv"); // i bendra faila.
             System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
                     "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
         }else {
