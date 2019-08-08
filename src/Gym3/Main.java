@@ -26,7 +26,7 @@ public class Main {
                             "Prasom pateikti informacija reikalinga duomenu atnaujinimui.\n");
                     System.out.print("Iveskit savo ID numeri:\t");
                     String userID = scan.next();
-                    if (Write_Read_File.readFile( "All_Clients\\All.csv", userID)){ // gauna kelia ir iesko pagal ID
+                    if (Write_Read_File.findSomethingInAllFile( "All_Clients\\All.csv",0, userID)){ // gauna kelia ir iesko pagal ID
                         System.out.println("labas " + 
                     Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 12) + 
                     "! Kaip sekesi sportuoti ?"); // iesko 12 iraso asmeniniame faile pirmoje eiluteje

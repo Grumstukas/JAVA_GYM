@@ -26,7 +26,7 @@ public class NewGymClient {
             System.out.print("telefono numeris: \t\t|\t");
             phoneNumber = input.next();
             System.out.print("elektroninis pastas: \t|\t");
-            email =  input.next();
+            email = input.next();
             System.out.print("kuno mase (kg): \t\t\t|\t");
             clientWeight = input.nextDouble();
             System.out.print("kuno ugis(cm): \t\t\t|\t");
@@ -35,23 +35,29 @@ public class NewGymClient {
             System.out.print("Error, time to die. Re-run the program.");
         }
 
-        if(!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 8, email)){ // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
+        if (!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 8, email)) { // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
+
+/****TODO
             setClientID(ID_Generator.newID(clientName, clientSurname));
+            do {
+                setClientID(ID_Generator.newID(clientName, clientSurname));
+            } while (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, getClientID()) == true);
+
 
             setClientBMI(BMICalc.calcBMI(clientWeight, clientHeight)); // FALSE, tesia registracija, skaiciuoja BMI
             String clientPath = "All_Clients\\" + getClientID() + ".csv"; // sukuria asmenini faila 
             String newClientInfo = clientID + "\t|\t" + clientName + "\t|\t" + clientSurname + // formatas kaip irasyti duomenis i BENDRA faila.
                     "\t|\t" + phoneNumber + "\t|\t" + email + "\t|\t" + clientWeight + "\t|\t" + clientHeight + "\t|\t" + clientBMI;
 
-            String personalClientInfo = clientID +"\t|\t" + CurrentDate.currentTime() +"\t|\t" + 
-            clientHeight+"\t|\t" + "dar nesportavo"+ "\t|\t" + clientWeight +"\t|\t" + clientBMI +"\t|\t" + clientName; // iraso duomenis i ASMENINI faila.
+            String personalClientInfo = clientID + "\t|\t" + CurrentDate.currentTime() + "\t|\t" +
+                    clientHeight + "\t|\t" + "dar nesportavo" + "\t|\t" + clientWeight + "\t|\t" + clientBMI + "\t|\t" + clientName; // iraso duomenis i ASMENINI faila.
 
 
             Write_Read_File.writeClientInfoToFile(personalClientInfo, clientPath); // personal
             Write_Read_File.writeClientInfoToFile(newClientInfo, "All_Clients\\All.csv"); // i bendra faila.
             System.out.println("Jums suteiktas ID yra   " + getClientID() + "   " +
                     "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
-        }else {
+        } else {
             System.out.print("Tokiu pastu klientas jau yra uzregistruotas, prasome patikslinti visa registracijos informacija.");
         }
 

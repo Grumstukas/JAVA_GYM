@@ -29,7 +29,7 @@ public class Write_Read_File {
             if (readFile(clientPath, clientInfo) == false) { // Pereina i sekanti metoda.
                 registration = new FileWriter(allThisFileLines, true); // yra turinys?? iraso nauja sekancia eilute.
                 registration.write(clientInfo); // ka irasyti.
-                registration.write(System.getProperty("line.separator")); // zino, kad turi nauja elementa "eilute" irasyti i nauja eilute.
+                registration.write(System.getProperty("line.separator")); // zino, kad turi nauja elementa "eilute" irasyti i nauja eilute. tipo "ENTER"
                 registration.flush(); // nuleido
                 registration.close(); // uzdare dangti.
             }
@@ -41,22 +41,14 @@ public class Write_Read_File {
     /**
      * reads given file line by line, pushes all lines to list, and then searches in that list of uneque line
      *
-     * @param pathToReed
+     * @param pathToRead
      * @param clientInfo
      * @return
      */
     public static boolean readFile(String pathToRead, String clientInfo) {
         boolean newLineInClientBook = false; // praso iniciavimo, tik del to FALSE.
-        List<String> allThisFileLines = new ArrayList<String>(); // sukuria failo eiluciu sarasa.  
-        File fileForRead = new File(pathToRead); 
-        try (Scanner scanner = new Scanner(fileForRead)) {
-            while (scanner.hasNextLine()) { // kol randa ka skaityti tol irasineja tas eilutes i sarasa.
-                allThisFileLines.add(scanner.next());
-                scanner.nextLine();
-            }
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
+
         for (int i = 0; i < allThisFileLines.size(); i++) { // iteruojasi per visas eilutes (viena eilute - vienas elementas)
             if (allThisFileLines.size() == 0) {
                 newLineInClientBook = true; // jeigu esi tuscias, tai ok as irasysiu papildoma eilute.
@@ -71,20 +63,12 @@ public class Write_Read_File {
 
     /**
      * metodas skaito tik iš pirmos eilutes
-     * @param pathToReed skaitomo failo adresas
+     * @param pathToRead skaitomo failo adresas
      * @param index ieskomo dalyko eiles numeris (toje pirmoje eileje)
      * @return stringo tipo ieskomo parametro vertę.
      */
     public static String findSomething (String pathToRead, int index) {
-        List<String> allThisFileLines = new ArrayList<String>(); // atskira dezute viska ka perskaito po eilute sudeda i nauja sarasa.
-        File fileForRead = new File(pathToRead); // 
-        try (Scanner scanner = new Scanner(fileForRead)) { // 
-            while (scanner.hasNextLine()) {
-                allThisFileLines.add(scanner.nextLine());
-            }
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         String firstLine =  allThisFileLines.get(0); // pirmas elementas - pirma eilute.
         String firstLineElements [] = firstLine.split("\t|\t"); // pirmos eilutes elementu sarasas.
         return firstLineElements [index]; 
@@ -92,23 +76,15 @@ public class Write_Read_File {
 
     /**
      * Metodas skaito visa faila po eilute
-     * @param pathToReed skaitomo failo adresas
+     * @param pathToRead skaitomo failo adresas
      * @param index ieskomo dalyko eiles numeris
      * @param thatSomething stringo tipo ieskomas dalykas
      * @return boolean True- jeigu rado, false- jei nerado.
      */
     public static boolean findSomethingInAllFile (String pathToRead, int index, String thatSomething) {
         boolean found = false; // inicializacija
-        List<String> allThisFileLines = new ArrayList<>(); // atskira dezute viska ka perskaito po eilute sudeda i nauja sarasa.
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>(); // busimas ieskomu elementu sarasas.
-        File fileForRead = new File(pathToRead); // skaitau ir surasau i nauja sarasa. 
-        try (Scanner scanner = new Scanner(fileForRead)) {
-            while (scanner.hasNextLine()) {
-                allThisFileLines.add(scanner.nextLine());
-            }
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
 
         for (int i = 0; i<allThisFileLines.size(); i++){ // iteruoja per visa sudarytu eiluciu sarasa.
             String line[] = allThisFileLines.get(i).split("\t|\t"); // sukuria po nauja masyva kikevienai eilutei.
@@ -121,4 +97,18 @@ public class Write_Read_File {
         }
         return found;
     }
+
+    private static List<String> readAllGivenFileLinesAndReturnListOfAllLines(String pathToRead) {
+        List<String> allThisFileLines = new ArrayList<String>(); // sukuria failo eiluciu sarasa.
+        try (Scanner scanner = new Scanner(new File(pathToRead))) { //skaito nurodyta faila
+            while (scanner.hasNextLine()) { // kol randa ka skaityti tol irasineja failo eilutes i sarasa.
+                allThisFileLines.add(scanner.nextLine());
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return allThisFileLines; //grazina perskaitytu eiluciu sarasa
+    }
+
+
 }
