@@ -1,8 +1,6 @@
 package Gym3;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,22 +12,24 @@ public class Write_Read_File {
      * @param clientInfo information that needs to be written
      * @param clientPath path to file that information must be written in
      */
-    public static void writeClientInfoToFile(String clientInfo, String clientPath) {
-        FileWriter registration = null; // praso iniciavimo, tik del to NULL.
-        File allThisFileLines = null; // praso iniciavimo, tik del to NULL.
-
+    public static void writeClientInfoToFile(String headers, String clientInfo, String clientPath) {
+        File clientFile = null; // praso iniciavimo, tik del to NULL.
         File newDirectory = new File("All_Clients"); // kuria FOLDERY.
         boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
-        try {
-            allThisFileLines = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
-            if (!allThisFileLines.exists()) { // AR egzistuoja '!'
-
-                allThisFileLines.createNewFile(); // default metodas sukurti faila.
+        try (FileOutputStream fos = new FileOutputStream(clientPath, true)){
+            PrintWriter registration = new PrintWriter(fos);
+            clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
+            if (!clientFile.exists()) { // AR egzistuoja '!'
+                clientFile.createNewFile(); // default metodas sukurti faila.
             }
-            if (readFile(clientPath, clientInfo) == false) { // Pereina i sekanti metoda.
-                registration = new FileWriter(allThisFileLines, true); // yra turinys?? iraso nauja sekancia eilute.
-                registration.write(clientInfo); // ka irasyti.
-                registration.write(System.getProperty("line.separator")); // zino, kad turi nauja elementa "eilute" irasyti i nauja eilute. tipo "ENTER"
+            if (readFile(clientPath, clientInfo) == 0){ //jeigu failas - tuscias
+                registration.println(headers); //irsaso header eilute
+                registration.println(clientInfo); //irsaso kliento informacijos eilute
+                registration.flush(); // nuleido
+                registration.close(); // uzdare dangti.
+            }
+            if (readFile(clientPath, clientInfo) == 1) { //jeigu failas - sukurtas ir netuscias
+                registration.println(clientInfo);//irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
                 registration.close(); // uzdare dangti.
             }
@@ -45,17 +45,17 @@ public class Write_Read_File {
      * @param clientInfo
      * @return
      */
-    public static boolean readFile(String pathToRead, String clientInfo) {
-        boolean newLineInClientBook = false; // praso iniciavimo, tik del to FALSE.
+    public static int readFile(String pathToRead, String clientInfo) {
+        int newLineInClientBook = 0; // praso iniciavimo, tik del to FALSE.
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
 
         for (int i = 0; i < allThisFileLines.size(); i++) { // iteruojasi per visas eilutes (viena eilute - vienas elementas)
             if (allThisFileLines.size() == 0) {
-                newLineInClientBook = true; // jeigu esi tuscias, tai ok as irasysiu papildoma eilute.
+                newLineInClientBook = 0; // jeigu esi tuscias, tai ok as irasysiu papildoma eilute.
             } else if (!allThisFileLines.contains(clientInfo)) { // jeigu ne tuscias "!", klausiu ar neturi jau tokio pacio "contains".
-                newLineInClientBook = false; // jeigu turi(contains), tai neirasau.
+                newLineInClientBook = 1; // jeigu turi(contains), tai neirasau.
             } else {
-                newLineInClientBook = true;
+                newLineInClientBook = 2;
             }
         }
         return newLineInClientBook;
@@ -69,8 +69,8 @@ public class Write_Read_File {
      */
     public static String findSomething (String pathToRead, int index) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
-        String firstLine =  allThisFileLines.get(0); // pirmas elementas - pirma eilute.
-        String firstLineElements [] = firstLine.split("\t|\t"); // pirmos eilutes elementu sarasas.
+        String firstLine =  allThisFileLines.get(1); // pirmas elementas - pirma eilute.
+        String firstLineElements [] = firstLine.split(","); // pirmos eilutes elementu sarasas.
         return firstLineElements [index]; 
     }
 
@@ -87,7 +87,7 @@ public class Write_Read_File {
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>(); // busimas ieskomu elementu sarasas.
 
         for (int i = 0; i<allThisFileLines.size(); i++){ // iteruoja per visa sudarytu eiluciu sarasa.
-            String line[] = allThisFileLines.get(i).split("\t|\t"); // sukuria po nauja masyva kikevienai eilutei.
+            String line[] = allThisFileLines.get(i).split(","); // sukuria po nauja masyva kikevienai eilutei.
             ListOfThingtsThatYouAreLookingFor.add(line[index]); // is kiekvienos eilutes masyvo ima konkrecia reiksme "index" ir talpina i nauja ieskomu elementu sarasa.
         }
         if (ListOfThingtsThatYouAreLookingFor.size()>0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething)){ // tikrina ar ne tusias '&' iesko ar jau yra ieskomas elementas.

@@ -12,7 +12,7 @@ public class ID_Generator {
     }
 
     private static int randomNumber() {
-        int random = (int) Math.floor(Math.random() * 2)+100;
+        int random = (int) Math.floor(Math.random() * 899) + 100;
         return random;
     }
 }

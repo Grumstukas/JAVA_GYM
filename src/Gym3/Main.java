@@ -16,20 +16,20 @@ public class Main {
             System.out.println("1. Press ' 1 ' jeigu norite uzsiregistruoti");
             System.out.println("2. Press ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
             int userInput = scan.nextInt();
+
             switch (userInput) {
+
                 case 1:
-                    NewGymClient clientNew = new NewGymClient(); 
+                    NewGymClient clientNew = new NewGymClient();
                     clientNew.takeInfo();
                     break;
+
                 case 2:
-                    System.out.print("Malonu kad sportojate JAVA GYM :)\n" +
-                            "Prasom pateikti informacija reikalinga duomenu atnaujinimui.\n");
+                    System.out.print("Malonu kad sportojate JAVA GYM :)\nPrasom pateikti informacija reikalinga duomenu atnaujinimui.\n");
                     System.out.print("Iveskit savo ID numeri:\t");
                     String userID = scan.next();
                     if (Write_Read_File.findSomethingInAllFile( "All_Clients\\All.csv",0, userID)){ // gauna kelia ir iesko pagal ID
-                        System.out.println("labas " + 
-                    Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 12) + 
-                    "! Kaip sekesi sportuoti ?"); // iesko 12 iraso asmeniniame faile pirmoje eiluteje
+                        System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 6) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
                         OldGymClient clientOld = new OldGymClient(userID);
                         clientOld.updateInfo();
                     }else{
@@ -37,6 +37,7 @@ public class Main {
                         newOrExistingUser();
                     }
                     break;
+
                 default:
                     System.out.println("Error, time to die. Re-run the program.");
                     newOrExistingUser();
