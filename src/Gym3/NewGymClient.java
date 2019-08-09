@@ -27,7 +27,7 @@ public class NewGymClient {
                 clientName = input.nextLine();
             }
             System.out.print("Kokia Jusu pavarde?\t|\t");
-            clientSurname = input.next();
+            clientSurname =  input.nextLine();
             while (!clientSurname.matches("[a-zA-Z]+")) { // this loop throws same printout twice, why?..
                 System.out.print("Go ask your parents how to write a word:");
                 clientSurname = input.nextLine();
