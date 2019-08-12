@@ -14,15 +14,17 @@ public class Write_Read_File {
      */
     public static void writeClientInfoToFile(String headers, String clientInfo, String clientPath) {
         File clientFile = null; // praso iniciavimo, tik del to NULL.
-        File newDirectory = new File("All_Clients"); // kuria FOLDERY.
-        boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
-        try (FileOutputStream fos = new FileOutputStream(clientPath, true)){
+
+            File newDirectory = new File("All_Clients"); // kuria FOLDERY.
+            boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
+        System.out.println("sukurta");
+
+        try (FileOutputStream fos = new FileOutputStream(clientPath, true)) {
             PrintWriter registration = new PrintWriter(fos);
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
-            if (!clientFile.exists()) { // AR egzistuoja '!'
-                clientFile.createNewFile(); // default metodas sukurti faila.
-            }
-            if (readFile(clientPath, clientInfo) == 0){ //jeigu failas - tuscias
+            clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
+
+            if (readFile(clientPath, clientInfo) == 0) { //jeigu failas - tuscias
                 registration.println(headers); //irsaso header eilute
                 registration.println(clientInfo); //irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
@@ -63,36 +65,38 @@ public class Write_Read_File {
 
     /**
      * metodas skaito tik iš pirmos eilutes
+     *
      * @param pathToRead skaitomo failo adresas
-     * @param index ieskomo dalyko eiles numeris (toje pirmoje eileje)
+     * @param index      ieskomo dalyko eiles numeris (toje pirmoje eileje)
      * @return stringo tipo ieskomo parametro vertę.
      */
-    public static String findSomething (String pathToRead, int index) {
+    public static String findSomething(String pathToRead, int index) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
-        String firstLine =  allThisFileLines.get(1); // pirmas elementas - pirma eilute.
-        String firstLineElements [] = firstLine.split(","); // pirmos eilutes elementu sarasas.
-        return firstLineElements [index]; 
+        String firstLine = allThisFileLines.get(1); // pirmas elementas - pirma eilute.
+        String firstLineElements[] = firstLine.split(","); // pirmos eilutes elementu sarasas.
+        return firstLineElements[index];
     }
 
     /**
      * Metodas skaito visa faila po eilute
-     * @param pathToRead skaitomo failo adresas
-     * @param index ieskomo dalyko eiles numeris
+     *
+     * @param pathToRead    skaitomo failo adresas
+     * @param index         ieskomo dalyko eiles numeris
      * @param thatSomething stringo tipo ieskomas dalykas
      * @return boolean True- jeigu rado, false- jei nerado.
      */
-    public static boolean findSomethingInAllFile (String pathToRead, int index, String thatSomething) {
+    public static boolean findSomethingInAllFile(String pathToRead, int index, String thatSomething) {
         boolean found = false; // inicializacija
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>(); // busimas ieskomu elementu sarasas.
 
-        for (int i = 0; i<allThisFileLines.size(); i++){ // iteruoja per visa sudarytu eiluciu sarasa.
+        for (int i = 0; i < allThisFileLines.size(); i++) { // iteruoja per visa sudarytu eiluciu sarasa.
             String line[] = allThisFileLines.get(i).split(","); // sukuria po nauja masyva kikevienai eilutei.
             ListOfThingtsThatYouAreLookingFor.add(line[index]); // is kiekvienos eilutes masyvo ima konkrecia reiksme "index" ir talpina i nauja ieskomu elementu sarasa.
         }
-        if (ListOfThingtsThatYouAreLookingFor.size()>0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething)){ // tikrina ar ne tusias '&' iesko ar jau yra ieskomas elementas.
+        if (ListOfThingtsThatYouAreLookingFor.size() > 0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething)) { // tikrina ar ne tusias '&' iesko ar jau yra ieskomas elementas.
             found = true;
-        }else {
+        } else {
             found = false;
         }
         return found;

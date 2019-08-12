@@ -51,7 +51,7 @@ public class OldGymClient{
 //        clientWeight = input.nextDouble();
 
         String clientPath = "All_Clients\\" + getClientID() + ".csv";
-        clientHeight = Double.parseDouble(Write_Read_File.findSomething (clientPath, 2)); // 4 vietoje sedi ugis.
+        clientHeight = Double.parseDouble(Write_Read_File.findSomething (clientPath, 2));
         clientBMI = BMICalc.calcBMI(clientWeight, clientHeight);
 
         String personalFileHeaders = "ID,Data,Kliento ugis(cm),Aktyvumo laikas,Kliento svoris,Kuno mases indeksas,Vardas";
