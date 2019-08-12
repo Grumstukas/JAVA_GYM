@@ -18,8 +18,8 @@ public class Write_Read_File {
             File newDirectory = new File("All_Clients"); // kuria FOLDERY.
             boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
 
-        try (FileOutputStream fos = new FileOutputStream(clientPath, true)) {
-            PrintWriter registration = new PrintWriter(fos);
+        try (FileOutputStream fos = new FileOutputStream(clientPath, true);
+             PrintWriter registration = new PrintWriter(fos)) {
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
             clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
 
@@ -27,12 +27,10 @@ public class Write_Read_File {
                 registration.println(headers); //irsaso header eilute
                 registration.println(clientInfo); //irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
-                registration.close(); // uzdare dangti.
             }
             if (readFile(clientPath, clientInfo) == 1) { //jeigu failas - sukurtas ir netuscias
                 registration.println(clientInfo);//irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
-                registration.close(); // uzdare dangti.
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,6 +109,29 @@ public class Write_Read_File {
             System.out.println(ex);
         }
         return allThisFileLines; //grazina perskaitytu eiluciu sarasa
+    }
+
+    /**
+     *
+     * @param pathToRead - adresas
+     * @param keyColumnIndex - pagal koki paramera (arba stulpeli) filtruoti, kad issirinkti tinkama eilute is viso failo (pagal ID, kuris dazniausiai bus nulintam stulpelyje)
+     * @param indexOfRequiredColumn - kuriame stulpelyje guli reikalinga reiksme?
+     * @param keyForSpecialLine - pvz kliento ID, kuris bus unikalus ir pagal ji bus galima issirinkti tinkama eilute
+     * @return String reiksme stulpelio ir eilutes susikirtimo reiksme
+     */
+    public static String findSomethingInCommonFile(String pathToRead,int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
+
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
+        List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>();
+
+        for (int i = 0; i < allThisFileLines.size(); i++) {
+            String line[] = allThisFileLines.get(i).split(",");
+            ListOfThingtsThatYouAreLookingFor.add(line[keyColumnIndex]);
+        }
+        int lineNumber =  ListOfThingtsThatYouAreLookingFor.indexOf(keyForSpecialLine);
+        String[] splitedLine = allThisFileLines.get(lineNumber).split(",");
+        String answer = splitedLine[indexOfRequiredColumn];
+        return answer;
     }
 
 
