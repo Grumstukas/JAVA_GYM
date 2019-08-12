@@ -18,7 +18,7 @@ public class ReadFileAndWriteToList {
         System.out.println(Arrays.toString(line));
     }
         private static List<String> readAllGivenFileLinesAndReturnListOfAllLines(String pathToRead) {
-        List<String> allThisFileLines = new ArrayList<String>(); // sukuria failo eiluciu sarasa.
+        List<String> allThisFileLines = new ArrayList<>(); // sukuria failo eiluciu sarasa.
         File fileForRead = new File(pathToRead);
         try (Scanner scanner = new Scanner(fileForRead)) {
             while (scanner.hasNextLine()) { // kol randa ka skaityti tol irasineja tas eilutes i sarasa.

@@ -17,7 +17,6 @@ public class Write_Read_File {
 
             File newDirectory = new File("All_Clients"); // kuria FOLDERY.
             boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
-        System.out.println("sukurta");
 
         try (FileOutputStream fos = new FileOutputStream(clientPath, true)) {
             PrintWriter registration = new PrintWriter(fos);

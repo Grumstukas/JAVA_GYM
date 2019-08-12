@@ -52,7 +52,7 @@ public class NewGymClient {
             System.out.print("elektroninis pastas: \t|\t");
             email =  input.next();
             do {
-                System.out.println("kuno mase (kg): \t\t\t|\t");
+                System.out.print("kuno mase (kg): \t\t\t|\t");
                 if (input.hasNextDouble()) {
                     clientWeight = input.nextDouble();
                     isDouble = true;
