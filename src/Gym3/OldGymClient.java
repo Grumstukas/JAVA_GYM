@@ -10,9 +10,8 @@ public class OldGymClient {
     // TrainingMachines; ??? List // ENUM
     private double clientHeight;
     private double clientBMI;
-    private String clientPath = "All_Clients\\" + getClientID() + ".csv";
-    private String personalFileHeaders = "ID,Data,Kliento ugis(cm),Aktyvumo laikas,Kliento svoris,Kuno mases indeksas,Vardas";
-    private String clientInfo = clientID + "," + CurrentDate.currentTime() + "," + clientHeight + "," + clientActivity + "," + clientWeight + "," + clientBMI;
+    private String personalFileHeaders = "ID,Data,Laikas,Kliento ugis(cm),Aktyvumo laikas,Kliento svoris,Kuno mases indeksas,Vardas";
+
 
     public OldGymClient(String clientID) {
         this.clientID = clientID;
@@ -27,6 +26,8 @@ public class OldGymClient {
         clientHeight=Double.parseDouble(Write_Read_File.findSomethingInCommonFile("All_Clients\\All.csv",0,6,getClientID()));
         clientBMI=new BMICalc(clientWeight,clientHeight).getBMI();
 
+        String clientPath = "All_Clients\\" + getClientID() + ".csv";
+        String clientInfo = clientID + "," + CurrentDate.currentTime()[0] + "," + CurrentDate.currentTime()[1] + "," + clientHeight + "," + clientActivity + "," + clientWeight + "," + clientBMI;
         Write_Read_File.writeClientInfoToFile(personalFileHeaders,clientInfo,clientPath); // i asmenini faila nauja eilute po aktyvumo atnaujinimo.
         }
 

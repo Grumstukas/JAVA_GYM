@@ -31,7 +31,7 @@ public class InputValidation {
 
     public static String validateDouble (String inputToValidate) {
         try  {
-            while (!inputToValidate.matches("[0-9]+")) {
+            while (!inputToValidate.matches("[+-]?[0-9]+(\\.[0-9]+)?([Ee][+-]?[0-9]+)?")) {
                 System.out.print("turi buti skaicius:");
                 inputToValidate = ScannerClass.getStringInputValue();
             }

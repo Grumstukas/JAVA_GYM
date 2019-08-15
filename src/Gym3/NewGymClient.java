@@ -12,9 +12,9 @@ public class NewGymClient extends AbstractClient {
     private double clientWeight;
     private double clientHeight;
     private double clientBMI;
-    private String personalFileHeaders = "ID,Data,Kliento ugis(cm),Aktyvumo laikas,Kliento svoris,Kuno mases indeksas,Vardas";
-    private String commonFileHeaders = "ID,Vardas,Pavarde,Telefono numeris,Elektroninis pastas,Kliento svoris,Kliento ugis,Kuno mases indeksas";
-    
+    private String personalFileHeaders = "ID,Data,Laikas,Kliento ugis(cm),Aktyvumo laikas,Kliento svoris,Kuno mases indeksas,Vardas";
+    private String commonFileHeaders = "ID,Vardas,Pavarde,Telefono numeris,Elektroninis pastas,Kliento svoris,Kliento ugis,Kuno mases indeksas, Rgistracijos data";
+
     /**
      * This method asks of all other parameters that client must have.
      */
@@ -43,9 +43,9 @@ public class NewGymClient extends AbstractClient {
             setClientID(new ID_Generator(getClientName(), getClientSurname()).getId());
             setClientBMI(new BMICalc(getClientWeight(), getClientHeight()).getBMI()); // FALSE, tesia registracija, skaiciuoja BMI
 
-            String clientPath="All_Clients\\"+clientID+".csv"; // sukuria asmenini faila
-            String newClientInfo = clientID + "," + clientName + "," + clientSurname +",+370" + phoneNumber + "," + email + "," + clientWeight + "," + clientHeight + "," + clientBMI;
-            String personalClientInfo = clientID + "," + CurrentDate.currentTime() + "," + clientHeight + "," + "uzregistruotas" + "," + clientWeight + "," + clientBMI + "," + clientName; // iraso duomenis i ASMENINI faila.
+            String clientPath = "All_Clients\\" + clientID + ".csv"; // sukuria asmenini faila
+            String newClientInfo = clientID + "," + clientName + "," + clientSurname + ",+370" + phoneNumber + "," + email + "," + clientWeight + "," + clientHeight + "," + clientBMI + "," + CurrentDate.currentTime()[0];
+            String personalClientInfo = clientID + "," + CurrentDate.currentTime()[0] + "," + CurrentDate.currentTime()[1] + "," + clientHeight + "," + "uzregistruotas" + "," + clientWeight + "," + clientBMI + "," + clientName; // iraso duomenis i ASMENINI faila.
 
             Write_Read_File.writeClientInfoToFile(personalFileHeaders, personalClientInfo, clientPath); // personal
             Write_Read_File.writeClientInfoToFile(commonFileHeaders, newClientInfo, "All_Clients\\All.csv"); // i bendra faila.
@@ -62,30 +62,37 @@ public class NewGymClient extends AbstractClient {
     public String getClientID() {
         return clientID;
     }
+
     @Override
     public String getClientName() {
         return clientName;
     }
+
     @Override
     public String getClientSurname() {
         return clientSurname;
     }
+
     @Override
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     @Override
     public String getEmail() {
         return email;
     }
+
     @Override
     public double getClientWeight() {
         return clientWeight;
     }
+
     @Override
     public double getClientHeight() {
         return clientHeight;
     }
+
     @Override
     public double getClientBMI() {
         return clientBMI;
@@ -96,29 +103,36 @@ public class NewGymClient extends AbstractClient {
     public void setClientID(String clientID) {
         this.clientID = clientID;
     }
+
     @Override
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
+
     @Override
     public void setClientSurname(String clientSurname) {
         this.clientSurname = clientSurname;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     @Override
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Override
     public void setClientWeight(double clientWeight) {
         this.clientWeight = clientWeight;
     }
+
     @Override
     public void setClientHeight(double clientHeight) {
         this.clientHeight = clientHeight;
     }
+
     @Override
     public void setClientBMI(double clientBMI) {
         this.clientBMI = clientBMI;

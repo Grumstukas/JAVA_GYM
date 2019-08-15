@@ -4,10 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CurrentDate {
-    public static String currentTime(){
+    public static String[] currentTime(){
         LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
+        DateTimeFormatter nowDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter nowTime = DateTimeFormatter.ofPattern("HH:mm");
+        String[] timeInfo = new String[2];
+        timeInfo[0] = myDateObj.format(nowDate);
+        timeInfo[1] = myDateObj.format(nowTime);
+        return timeInfo;
     }
+
 }
