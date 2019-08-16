@@ -73,6 +73,12 @@ public class Write_Read_File {
         String firstLineElements[] = firstLine.split(","); // pirmos eilutes elementu sarasas.
         return firstLineElements[index];
     }
+    public static String findSomethingInLastLine(String pathToRead, int index) {
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
+        String firstLine = allThisFileLines.get(allThisFileLines.size()-1); // pirmas elementas - pirma eilute.
+        String firstLineElements[] = firstLine.split(","); // pirmos eilutes elementu sarasas.
+        return firstLineElements[index];
+    }
 
     /**
      * Metodas skaito visa faila po eilute

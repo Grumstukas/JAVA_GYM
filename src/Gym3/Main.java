@@ -3,6 +3,7 @@ package Gym3;
 import jdk.nashorn.internal.parser.Scanner;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -18,6 +19,7 @@ public class Main {
         System.out.println("2. Press ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
         System.out.println("3. Press ' 3 ' informacija apie esamo kliento svorio pokytį per nurodytą laiką");
         System.out.println("4. Press ' 4 ' informacija apie esamo kliento kuno mases indekso pokytį per nurodytą laiką");
+        System.out.println("5. Press ' 5 ' atsiskaitymas");
 
         int userInput = ScannerClass.getIntInputValue();
         switch (userInput) {
@@ -32,7 +34,7 @@ public class Main {
                 System.out.print("Iveskit savo ID numeri:\t");
                 String userID = ScannerClass.getStringInputValue();
                 if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID)) { // gauna kelia ir iesko pagal ID
-                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 6) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
+                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 7) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
                     OldGymClient clientOld = new OldGymClient(userID);
                     clientOld.updateInfo();
                 } else {
@@ -43,7 +45,7 @@ public class Main {
                 System.out.print("Iveskit savo ID numeri:\t");
                 String userID2 = ScannerClass.getStringInputValue();
                 if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID2)) { // gauna kelia ir iesko pagal ID
-                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID2 + ".csv", 6) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
+                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID2 + ".csv", 7) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
 
                     System.out.println("Prašau įveskite dvi datas yyyy-mm-dd formatu, Jūsų svrio pokyčiui paskaičiuoti");
                     System.out.print("nuo");
@@ -57,6 +59,24 @@ public class Main {
                 }
                 break;
             case 4:
+                break;
+            case 5:
+                double minutePrice = 0.1;
+
+                System.out.print("Iveskit savo ID numeri:\t");
+                String userID3 = ScannerClass.getStringInputValue();
+                if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID3)) { // gauna kelia ir iesko pagal ID
+                    //metodas
+                    LocalDate lastPaymentDay = CurrentDate.parseToDate(Write_Read_File.findSomethingInLastLine("All_Clients\\" + userID3+ "payments.csv",1));
+                    LocalDate today = LocalDate.now();
+
+                    System.out.println("lastPaymentDay string "+TimeCounter.countMinutes(userID3,lastPaymentDay, today));
+
+
+                } else {
+                    System.out.println("Panasu, jog padarete klaida ivesdamas jums suteikta ID, arba nesate registruotas musu sistemoje...\nPabandykite is naujo");
+                }
+
                 break;
 
             default:
