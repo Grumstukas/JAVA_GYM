@@ -1,9 +1,12 @@
 package Gym3;
 
-import jdk.nashorn.internal.parser.Scanner;
+import Gym3.Meniu.Methods.InputValidation;
+import Gym3.Meniu.Methods.ProgressCounter;
+import Gym3.Meniu.Methods.Payment;
+import Gym3.Meniu.NewGymClient;
+import Gym3.Meniu.OldGymClient;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 
 public class Main {
 
@@ -17,73 +20,58 @@ public class Main {
         System.out.print("Sveiki !\n");
         System.out.println("1. Press ' 1 ' jeigu norite uzsiregistruoti");
         System.out.println("2. Press ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
-        System.out.println("3. Press ' 3 ' informacija apie esamo kliento svorio pokytį per nurodytą laiką");
-        System.out.println("4. Press ' 4 ' informacija apie esamo kliento kuno mases indekso pokytį per nurodytą laiką");
-        System.out.println("5. Press ' 5 ' atsiskaitymas");
 
-        int userInput = ScannerClass.getIntInputValue();
+        String userInput = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(),"2");
         switch (userInput) {
 
-            case 1:
+            case "1":
                 NewGymClient clientNew = new NewGymClient();
                 clientNew.takeInfo();
+                System.out.println("Aciu, kad sportuojate JavaGym !");
                 break;
-
-            case 2:
-                System.out.print("Malonu kad sportojate JAVA GYM :)\nPrasom pateikti informacija reikalinga duomenu atnaujinimui.\n");
+            case "2":
                 System.out.print("Iveskit savo ID numeri:\t");
-                String userID = ScannerClass.getStringInputValue();
-                if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID)) { // gauna kelia ir iesko pagal ID
-                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID + ".csv", 7) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
-                    OldGymClient clientOld = new OldGymClient(userID);
-                    clientOld.updateInfo();
-                } else {
-                    System.out.println("Panasu, jog padarete klaida ivesdamas jums suteikta ID, arba nesate registruotas musu sistemoje...\nPabandykite is naujo");
-                }
-                break;
-            case 3:
-                System.out.print("Iveskit savo ID numeri:\t");
-                String userID2 = ScannerClass.getStringInputValue();
-                if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID2)) { // gauna kelia ir iesko pagal ID
-                    System.out.println("labas " + Write_Read_File.findSomething("All_Clients\\" + userID2 + ".csv", 7) + "! Kaip sekesi sportuoti ?"); // iesko 6 iraso asmeniniame faile
-
-                    System.out.println("Prašau įveskite dvi datas yyyy-mm-dd formatu, Jūsų svrio pokyčiui paskaičiuoti");
-                    System.out.print("nuo");
-                    String dateFrom = ScannerClass.getStringInputValue();
-                    System.out.println("iki");
-                    String dateTo = ScannerClass.getStringInputValue();
-                    //method
-                    ProgressCounter.getInfo(dateFrom, dateTo, userID2);
-                } else {
-                    System.out.println("Panasu, jog padarete klaida ivesdamas jums suteikta ID, arba nesate registruotas musu sistemoje...\nPabandykite is naujo");
-                }
-                break;
-            case 4:
-                break;
-            case 5:
-                double minutePrice = 0.1;
-
-                System.out.print("Iveskit savo ID numeri:\t");
-                String userID3 = ScannerClass.getStringInputValue();
-                if (Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 0, userID3)) { // gauna kelia ir iesko pagal ID
-                    //metodas
-                    LocalDate lastPaymentDay = CurrentDate.parseToDate(Write_Read_File.findSomethingInLastLine("All_Clients\\" + userID3+ "payments.csv",1));
-                    LocalDate today = LocalDate.now();
-
-                    System.out.println("lastPaymentDay string "+TimeCounter.countMinutes(userID3,lastPaymentDay, today));
-
-
-                } else {
-                    System.out.println("Panasu, jog padarete klaida ivesdamas jums suteikta ID, arba nesate registruotas musu sistemoje...\nPabandykite is naujo");
-                }
-
-                break;
+                String userID = Identification.isThisClientIDValid(ScannerClass.getStringInputValue());
+                Identification.salutation(userID);
+                int stop = 1;
+                do {
+                    System.out.println("1. Press ' 1 ' Pasportavote ? atnaujinkite duomenis!");
+                    System.out.println("2. Press ' 2 ' informacija apie Jusu svorio pokyti per nurodyta laika");
+                    System.out.println("3. Press ' 3 ' informacija apie Jusu kuno mases indekso pokyti per nurodyta laika");
+                    System.out.println("4. Press ' 4 ' atsiskaitymas uz treniruotes");
+                    System.out.println("5. Press ' 5 ' Aciu, viso gero!");
+                    String userInput2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(),"5");
+                    switch (userInput2) {
+                        case "1":
+                            OldGymClient clientOld = new OldGymClient(userID);
+                            clientOld.updateInfo();
+                            stop = 1;
+                            break;
+                        case "2":
+                            ProgressCounter.getInfo(userID, 5, "weight");
+                            stop = 1;
+                            break;
+                        case "3":
+                            ProgressCounter.getInfo(userID, 6, "bmi");
+                            stop = 1;
+                            break;
+                        case "4":
+                            Payment.countPriceToPay(userID);
+                            stop = 1;
+                            break;
+                        case "5":
+                            stop = 2;
+                            break;
+                        default:
+                            System.out.println("Aciu, kad sportuojate JavaGym !");
+                    }
+                }while (stop == 1);
 
             default:
-                System.out.println("Error, time to die. Re-run the program.");
-
+                System.out.println("Aciu, kad sportuojate JavaGym !");
         }
     }
+
     public static void main(String[] args) throws ParseException {
         meniu();
     }

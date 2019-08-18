@@ -1,4 +1,4 @@
-package Gym3;
+package Gym3.Meniu.Methods;
 
 public class ID_Generator {
     private String id;

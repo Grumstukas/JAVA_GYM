@@ -15,9 +15,6 @@ public class Write_Read_File {
     public static void writeClientInfoToFile(String headers, String clientInfo, String clientPath) {
         File clientFile = null; // praso iniciavimo, tik del to NULL.
 
-            File newDirectory = new File("All_Clients"); // kuria FOLDERY.
-            boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
-
         try (FileOutputStream fos = new FileOutputStream(clientPath, true);
              PrintWriter registration = new PrintWriter(fos)) {
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
@@ -105,7 +102,7 @@ public class Write_Read_File {
         return found;
     }
 
-    private static List<String> readAllGivenFileLinesAndReturnListOfAllLines(String pathToRead) {
+    public static List<String> readAllGivenFileLinesAndReturnListOfAllLines(String pathToRead) {
         List<String> allThisFileLines = new ArrayList<String>(); // sukuria failo eiluciu sarasa.
         try (Scanner scanner = new Scanner(new File(pathToRead))) { //skaito nurodyta faila
             while (scanner.hasNextLine()) { // kol randa ka skaityti tol irasineja failo eilutes i sarasa.
@@ -126,7 +123,6 @@ public class Write_Read_File {
      * @return String reiksme stulpelio ir eilutes susikirtimo reiksme
      */
     public static String findSomethingInCommonFile(String pathToRead,int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
-
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>();
 
@@ -140,5 +136,36 @@ public class Write_Read_File {
         return answer;
     }
 
+    public static void createDirectory(String pathname){
+        File newDirectory = new File(pathname); // kuria FOLDERY.
+        boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
+    }
 
+    public static void writeHTMLFile(String headers, String clientInfo, String clientPath) {
+        File clientFile = null; // praso iniciavimo, tik del to NULL.
+
+        try (FileOutputStream fos = new FileOutputStream(clientPath, true);
+             PrintWriter registration = new PrintWriter(fos)) {
+            clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
+            clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
+
+            if (readFile(clientPath, "<!DOCTYPE html>") == 0) { //jeigu failas - tuscias
+                registration.println(headers); //irsaso header eilute
+                registration.println(clientInfo); //irsaso kliento informacijos eilute
+                registration.flush(); // nuleido
+            }
+            if (readFile(clientPath, "<!DOCTYPE html>") == 1) { //jeigu failas - sukurtas ir netuscias
+                registration.println(clientInfo);//irsaso kliento informacijos eilute
+                registration.flush(); // nuleido
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void deleteFile(String pathname) {
+        File fileForDelete = new File(pathname);
+        if (fileForDelete.exists()){
+            boolean check = fileForDelete.delete();
+        }
+    }
 }
