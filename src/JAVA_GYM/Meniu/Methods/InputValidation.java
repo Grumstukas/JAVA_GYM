@@ -1,10 +1,9 @@
-package Gym3.Meniu.Methods;
+package JAVA_GYM.Meniu.Methods;
 
-import Gym3.ScannerClass;
-import Gym3.Write_Read_File;
+import JAVA_GYM.ScannerClass;
+import JAVA_GYM.Write_Read_File;
 
 import java.text.ParseException;
-import java.time.LocalDate;
 
 public class InputValidation {
     public static String validateString(String inputToValidate) {

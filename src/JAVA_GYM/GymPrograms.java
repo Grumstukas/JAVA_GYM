@@ -1,6 +1,6 @@
-package Gym3;
+package JAVA_GYM;
 
-import Gym3.Meniu.Methods.CurrentDate;
+import JAVA_GYM.Meniu.Methods.CurrentDate;
 
 public class GymPrograms {
     /**

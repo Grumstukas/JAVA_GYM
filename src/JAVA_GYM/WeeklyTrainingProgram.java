@@ -1,4 +1,4 @@
-package Gym3;
+package JAVA_GYM;
 
 public enum  WeeklyTrainingProgram {
     MONDAY("CHEST-DAY", "Bench Press", "Incline Press"),

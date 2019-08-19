@@ -1,4 +1,4 @@
-package Gym3.Meniu;
+package JAVA_GYM.Meniu;
 
 public abstract class AbstractClient {
     private String clientID;

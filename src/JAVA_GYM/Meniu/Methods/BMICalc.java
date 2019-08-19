@@ -1,4 +1,4 @@
-package Gym3.Meniu.Methods;
+package JAVA_GYM.Meniu.Methods;
 
 public class BMICalc {
 

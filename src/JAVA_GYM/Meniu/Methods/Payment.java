@@ -1,7 +1,7 @@
-package Gym3.Meniu.Methods;
+package JAVA_GYM.Meniu.Methods;
 
-import Gym3.ScannerClass;
-import Gym3.Write_Read_File;
+import JAVA_GYM.ScannerClass;
+import JAVA_GYM.Write_Read_File;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -22,10 +22,17 @@ public class Payment {
         Period period = Period.between(lastPaymentDay, today);
         int diff = period.getDays() * 10;
 
-        for (LocalDate date = lastPaymentDay; date.isBefore(today); date = date.plusDays(1)) {
-            int minutes = Integer.parseInt(Write_Read_File.findSomethingInCommonFile(userActivityFile,
-                    1, 4, CurrentDate.dateToString(date)));
-            sumOfSpentMinutes = sumOfSpentMinutes + minutes;
+        for (LocalDate date = lastPaymentDay; date.isBefore(today.plusDays(1)); date = date.plusDays(1)) {
+            List<String> allActivityLines = Write_Read_File.readAllGivenFileLinesAndReturnListOfAllLines(userActivityFile);
+            for (int i = 0; i<allActivityLines.size();i++){
+                String [] lineElements = allActivityLines.get(i).split(",");
+                if ((CurrentDate.parseToDate(lineElements[1]).isEqual(today) ||
+                        (CurrentDate.parseToDate(lineElements[1]).isBefore(today)){
+                    int minutes = Integer.parseInt(Write_Read_File.findSomethingInCommonFile(userActivityFile,
+                            1, 4, CurrentDate.dateToString(date)));
+                    sumOfSpentMinutes = sumOfSpentMinutes + minutes;
+                }
+            }
         }
         double moneyAlreadyPaid = moneyAlreadyPaid(userPaymentFile, 2);
         double sumOfMoneyToPay = (double) Math.round(((sumOfSpentMinutes * minutePrice) - moneyAlreadyPaid) * 100) / 100;

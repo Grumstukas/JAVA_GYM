@@ -1,9 +1,9 @@
-package Gym3.Meniu;
+package JAVA_GYM.Meniu;
 
-import Gym3.*;
-import Gym3.Meniu.Methods.BMICalc;
-import Gym3.Meniu.Methods.CurrentDate;
-import Gym3.Meniu.Methods.InputValidation;
+import JAVA_GYM.*;
+import JAVA_GYM.Meniu.Methods.BMICalc;
+import JAVA_GYM.Meniu.Methods.CurrentDate;
+import JAVA_GYM.Meniu.Methods.InputValidation;
 
 public class OldGymClient {
 

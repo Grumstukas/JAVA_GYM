@@ -1,9 +1,4 @@
-package Gym3;
-
-import Gym3.Meniu.Methods.ProgressCounter;
-
-import java.text.ParseException;
-import java.util.Comparator;
+package JAVA_GYM;
 
 public class Identification {
     public static void salutation(String userID) {

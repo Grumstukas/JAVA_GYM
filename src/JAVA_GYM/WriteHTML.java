@@ -1,4 +1,4 @@
-package Gym3;
+package JAVA_GYM;
 
 import java.util.*;
 

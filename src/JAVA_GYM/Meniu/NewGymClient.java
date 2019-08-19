@@ -1,10 +1,10 @@
-package Gym3.Meniu;
+package JAVA_GYM.Meniu;
 
-import Gym3.*;
-import Gym3.Meniu.Methods.BMICalc;
-import Gym3.Meniu.Methods.CurrentDate;
-import Gym3.Meniu.Methods.ID_Generator;
-import Gym3.Meniu.Methods.InputValidation;
+import JAVA_GYM.*;
+import JAVA_GYM.Meniu.Methods.BMICalc;
+import JAVA_GYM.Meniu.Methods.CurrentDate;
+import JAVA_GYM.Meniu.Methods.ID_Generator;
+import JAVA_GYM.Meniu.Methods.InputValidation;
 
 public class NewGymClient extends AbstractClient {
 
@@ -54,7 +54,7 @@ public class NewGymClient extends AbstractClient {
             String personalClientInfo = clientID + "," + CurrentDate.currentTime()[0] + "," + CurrentDate.currentTime()[1] + "," + clientHeight + "," + "uzregistruotas" + "," + clientWeight + "," + clientBMI + "," + clientName; // iraso duomenis i ASMENINI faila.
             String personalPaymentClientInfo = clientID + "," + CurrentDate.currentTime()[0] + ",0";
 
-            Write_Read_File.createDirectory("All_Clients");
+
             Write_Read_File.writeClientInfoToFile(commonFileHeaders, newClientInfo, "All_Clients\\All.csv"); // i bendra faila.
             Write_Read_File.createDirectory("All_Clients\\" + clientID);
             Write_Read_File.writeClientInfoToFile(personalFileHeaders, personalClientInfo, clientPath); // personal

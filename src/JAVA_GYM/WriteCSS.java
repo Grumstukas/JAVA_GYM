@@ -1,4 +1,4 @@
-package Gym3;
+package JAVA_GYM;
 
 public class WriteCSS {
     public static String geretateCSS(){
