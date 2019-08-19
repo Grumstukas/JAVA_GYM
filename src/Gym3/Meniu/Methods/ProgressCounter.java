@@ -65,7 +65,7 @@ public class ProgressCounter {
                 stringDateTo,
                 unit);
 
-        Write_Read_File.writeHTMLFile("",clientHTML, filePath);
+        Write_Read_File.writeOtherInfoToClientFileAndDoNotDublicate(clientHTML, filePath, "<!DOCTYPE html>");
 
     }
 

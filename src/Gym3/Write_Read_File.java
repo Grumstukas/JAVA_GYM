@@ -141,7 +141,7 @@ public class Write_Read_File {
         boolean check = newDirectory.mkdir(); // PATS pirmas kartas gauna FALSE, sekanti karta gauna TRUE.
     }
 
-    public static void writeHTMLFile(String headers, String clientInfo, String clientPath) {
+    public static void writeOtherInfoToClientFileAndDoNotDublicate(String clientInfo, String clientPath, String doNotRepeatString) {
         File clientFile = null; // praso iniciavimo, tik del to NULL.
 
         try (FileOutputStream fos = new FileOutputStream(clientPath, true);
@@ -149,12 +149,11 @@ public class Write_Read_File {
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
             clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
 
-            if (readFile(clientPath, "<!DOCTYPE html>") == 0) { //jeigu failas - tuscias
-                registration.println(headers); //irsaso header eilute
+            if (readFile(clientPath, doNotRepeatString) == 0) { //jeigu failas - tuscias
                 registration.println(clientInfo); //irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }
-            if (readFile(clientPath, "<!DOCTYPE html>") == 1) { //jeigu failas - sukurtas ir netuscias
+            if (readFile(clientPath, doNotRepeatString) == 1) { //jeigu failas - sukurtas ir netuscias
                 registration.println(clientInfo);//irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }

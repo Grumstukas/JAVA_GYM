@@ -21,12 +21,20 @@ public class Main {
         System.out.println("1. Press ' 1 ' jeigu norite uzsiregistruoti");
         System.out.println("2. Press ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
 
-        String userInput = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(),"2");
+        String userInput = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
         switch (userInput) {
 
             case "1":
                 NewGymClient clientNew = new NewGymClient();
                 clientNew.takeInfo();
+                System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)");
+                String option = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
+                if (option.equals("1")) {
+                    GymPrograms.chooseProgram(clientNew.getClientID());
+                } else {
+                    return;
+                }
+
                 System.out.println("Aciu, kad sportuojate JavaGym !");
                 break;
             case "2":
@@ -40,11 +48,18 @@ public class Main {
                     System.out.println("3. Press ' 3 ' informacija apie Jusu kuno mases indekso pokyti per nurodyta laika");
                     System.out.println("4. Press ' 4 ' atsiskaitymas uz treniruotes");
                     System.out.println("5. Press ' 5 ' Aciu, viso gero!");
-                    String userInput2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(),"5");
+                    String userInput2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "5");
                     switch (userInput2) {
                         case "1":
                             OldGymClient clientOld = new OldGymClient(userID);
                             clientOld.updateInfo();
+                            System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)");
+                            String option2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
+                            if (option2.equals("1")) {
+                                GymPrograms.chooseProgram(userID);
+                            } else {
+                                return;
+                            }
                             stop = 1;
                             break;
                         case "2":
@@ -65,7 +80,7 @@ public class Main {
                         default:
                             System.out.println("Aciu, kad sportuojate JavaGym !");
                     }
-                }while (stop == 1);
+                } while (stop == 1);
 
             default:
                 System.out.println("Aciu, kad sportuojate JavaGym !");
