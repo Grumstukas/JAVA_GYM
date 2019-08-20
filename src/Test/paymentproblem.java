@@ -1,22 +1,24 @@
-package JAVA_GYM.Meniu.Methods;
+package Test;
 
+import JAVA_GYM.Meniu.Methods.CurrentDate;
 import JAVA_GYM.ScannerClass;
 import JAVA_GYM.Write_Read_File;
 
+
+import java.text.ParseException;
 import java.util.List;
 
-public class Payment {
-
-    public static void countPriceToPay(String userID)  {
+public class paymentproblem {
+    public static void main(String[] args) {
+        String userID = "TT424";
         String userActivityFile = "All_Clients\\" + userID + "\\" + userID + ".csv";
         String userPaymentFile = "All_Clients\\" + userID + "\\" + userID + "payments.csv";
-        List<String> allUserActivityFileLines = Write_Read_File.readAllGivenFileLinesAndReturnListOfAllLines(userActivityFile);
+        List<String> allThisFileLines = Write_Read_File.readAllGivenFileLinesAndReturnListOfAllLines(userActivityFile);
         double minutePrice = 0.1;
 
         int sumOfSpentMinutes = 0;
-
-        for (int i = 2; i < allUserActivityFileLines.size(); i++) {
-            String line[] = allUserActivityFileLines.get(i).split(",");
+        for (int i = 1; i < allThisFileLines.size(); i++) {
+            String line[] = allThisFileLines.get(i).split(",");
             sumOfSpentMinutes = sumOfSpentMinutes + Integer.parseInt(line[4]);
         }
         double moneyAlreadyPaid = moneyAlreadyPaid(userPaymentFile, 2);
@@ -43,7 +45,7 @@ public class Payment {
         }
     }
 
-    public static Double moneyAlreadyPaid(String pathToRead, int indexOfRequiredColumn) {
+        public static Double moneyAlreadyPaid(String pathToRead, int indexOfRequiredColumn) {
         List<String> allThisFileLines = Write_Read_File.readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         double sum = 0;
 

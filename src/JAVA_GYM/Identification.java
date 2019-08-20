@@ -20,11 +20,14 @@ public class Identification {
             }
             salutation.append("a");
             salutation.append("u");
-        } else if (name.charAt(name.length() - 1) == 'e') { //baigiasi "is"
-            for (int i = 0; i < name.length() - 1; i++) {
+        } else if (name.charAt(name.length() - 1) == 'e') { //baigiasi "e"
+            for (int i = 0; i <= name.length() - 1; i++) {
                 salutation.append(name.charAt(i));
             }
-            salutation.append("e");
+        } else if (name.charAt(name.length() - 1) == 'a') { //baigiasi "a"
+            for (int i = 0; i <= name.length() - 1; i++) {
+                salutation.append(name.charAt(i));
+            }
         }
 
         System.out.println("Labas " + salutation + "!");

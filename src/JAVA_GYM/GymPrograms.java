@@ -26,7 +26,7 @@ public class GymPrograms {
             clientInfo = highBMI_program (new StringBuilder());
             programName = "highBMI_program";
         }
-        System.out.println("Jeigu norite isigyti sia treniruociu programa - prasome sumoketi 50eur");
+        System.out.println("\nJeigu norite isigyti sia treniruociu programa - prasome sumoketi 50eur (iveskite - 50)");
         if (ScannerClass.getIntInputValue() == 50){
             Write_Read_File.deleteFile("All_Clients\\" + clientID + "\\" + clientID + "_program.csv");
             Write_Read_File.writeOtherInfoToClientFileAndDoNotDublicate(clientInfo,
@@ -38,12 +38,12 @@ public class GymPrograms {
         }else {
             return;
         }
-
     }
 
     public static String lowerBMI_program (StringBuilder fileInput) {
 
-        fileInput.append("Stai, jusu sporto treniruociu tvarkarastis! \nAs your BMI is lower than normal we offer to begin training with base exercises three times per week, " +
+        fileInput.append("Stai, jusu sporto treniruociu tvarkarastis!\n" +
+                "As your BMI is lower than normal we offer to begin training with base exercises three times per week, " +
                 "to stimulate muscle growth.\nHere is your program for a week. Training time suggested - 15 min streaching and " +
                 "40 min weights training.Overall - 55 min. Do not hestitate to ask if you have some questions.\n");
 
@@ -63,12 +63,13 @@ public class GymPrograms {
     }
 
     public static String normalBMI_program (StringBuilder fileInput) {
-        fileInput.append("Stai, jusu sporto treniruociu tvarkarastis! \nHere is your program for a week. Training time suggested - 60 min and 20 min cardio after. "
+        fileInput.append("Stai, jusu sporto treniruociu tvarkarastis!\n" +
+                "Here is your program for a week. Training time suggested - 60 min and 20 min cardio after. "
                 + "Overall - 80 min. Do not hestitate to ask if you have some questions.\n\n");
 
         for (WeeklyTrainingProgram days : WeeklyTrainingProgram.values()) {
-            fileInput.append(days+"\n"+ days.getDay() + " - " + days.getMachineOne() + "(" + days.getBalancedTraining()
-                    + ")" + ", " + days.getMachineTwo() + "(" + days.getBalancedTraining() + ")\n\n");
+            fileInput.append(days+"\t - \t"+ days.getDay() + " - " + days.getMachineOne() + "(" + days.getBalancedTraining()
+                    + ")" + ", " + days.getMachineTwo() + "(" + days.getBalancedTraining() + ")\n");
         }
         System.out.println(fileInput.toString());
         return fileInput.toString();
@@ -76,7 +77,7 @@ public class GymPrograms {
 
     public static String littleHigherBMI_program (StringBuilder fileInput) {
         fileInput.append("Stai, jusu sporto treniruociu tvarkarastis! \nHere is your program for a week. Training time suggested - 60 min and 20 min cardio after. "
-                + "Overall - 80 min. Do not hestitate to ask if you have some questions.\n\n");
+                + "Overall - 80 min. Do not hestitate to ask if you have some questions.\n");
         for ( int k = 0; k < WeeklyTrainingProgram.values().length - 2; k+=2 ) {
             fileInput.append(WeeklyTrainingProgram.values()[k] + " - " + WeeklyTrainingProgram.values()[k].getDay() + " | " +
                     WeeklyTrainingProgram.values()[k].getMachineOne() + " - " + WeeklyTrainingProgram.values()[k].getBalancedTraining()+"\n");
@@ -95,17 +96,6 @@ public class GymPrograms {
                 + " posture through each run.\nThese bodyweight moves will help you target your legs, "
                 + "core, and even your upper body.\nThe best part: With summer fast approaching, you can "
                 + "bust out these moves outside after a long run.");
-//        String profesionalOffer = "Prevent common running injuries and build strength "
-//                + "by adding bodyweight exercises to your weekly workout routine—no fancy "
-//                + "equipment or expensive gym membership required.\nHere are some of the best "
-//                + "bodyweight exercises you can do to strengthen your stride and maintain better"
-//                + " posture through each run.\nThese bodyweight moves will help you target your legs, "
-//                + "core, and even your upper body.\nThe best part: With summer fast approaching, you can "
-//                + "bust out these moves outside after a long run.";
-//        String[] lines = profesionalOffer.split("\n");//?
-//        for (String line : lines) {
-//            System.out.println(line);
-//        }
         System.out.println(fileInput.toString());
         return fileInput.toString();
     }

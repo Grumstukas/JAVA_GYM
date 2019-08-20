@@ -2,13 +2,17 @@ package JAVA_GYM;
 
 public class WriteCSS {
     public static String geretateCSS(){
-        String mainCSS = "body,\n" +
+
+        String mainCSS = "/**StyleFile**/\n" +
+                "body,\n" +
                 "body * {\n" +
                 "    margin: 0;\n" +
                 "    padding: 0;\n" +
                 "    vertical-align: top;\n" +
                 "    box-sizing: border-box;\n" +
-                "    background-color: wheat\n" +
+                "}\n" +
+                "body{\n" +
+                "    background-color: wheat;\n" +
                 "}\n" +
                 "\n" +
                 "header{\n" +
@@ -19,7 +23,7 @@ public class WriteCSS {
                 "    font-weight: 800;\n" +
                 "}\n" +
                 "img{\n" +
-                "    z-index: 5;\n" +
+                "    z-index: 1;\n" +
                 "    position: absolute;\n" +
                 "    right: 62px;\n" +
                 "    top: 0px;\n" +
@@ -31,6 +35,7 @@ public class WriteCSS {
                 "    width: 90%;\n" +
                 "    margin-left: 5%;\n" +
                 "    overflow-x: scroll;\n" +
+                "     background-color: wheat\n" +
                 "}\n" +
                 "    .graph{\n" +
                 "        position: relative;\n" +

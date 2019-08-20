@@ -22,20 +22,20 @@ public class Main {
         Write_Read_File.createFile("All_Clients\\All.csv");
 
         System.out.print("Sveiki !\n");
-        System.out.println("1. Press ' 1 ' jeigu norite uzsiregistruoti");
-        System.out.println("2. Press ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
+        System.out.println("1. Spauskite ' 1 ' jeigu norite uzsiregistruoti");
+        System.out.println("2. Spauskite ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
         String userInput = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
         switch (userInput) {
 
             case "1":
                 NewGymClient clientNew = new NewGymClient();
                 clientNew.takeInfo();
-                System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)");
-                String option = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
-                if (option.equals("1")) {
+                System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)\n jeigu nenorite : (spauskite 2)");
+                String option2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
+                if (option2.equals("1")) {
                     GymPrograms.chooseProgram(clientNew.getClientID());
-                } else {
-                    return;
+                } else if (option2.equals("2")){
+                    break;
                 }
 
                 System.out.println("Aciu, kad sportuojate JavaGym !");
@@ -57,10 +57,10 @@ public class Main {
                             OldGymClient clientOld = new OldGymClient(userID);
                             clientOld.updateInfo();
                             System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)\n jeigu nenorite : (spauskite 2)");
-                            String option2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
-                            if (option2.equals("1")) {
+                            String option = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
+                            if (option.equals("1")) {
                                 GymPrograms.chooseProgram(userID);
-                            } else if (option2.equals("2")){
+                            } else if (option.equals("2")){
                                 break;
                             }
                             stop = 1;

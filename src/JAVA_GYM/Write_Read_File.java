@@ -2,6 +2,7 @@ package JAVA_GYM;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,9 +71,10 @@ public class Write_Read_File {
         String firstLineElements[] = firstLine.split(","); // pirmos eilutes elementu sarasas.
         return firstLineElements[index];
     }
+
     public static String findSomethingInLastLine(String pathToRead, int index) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
-        String firstLine = allThisFileLines.get(allThisFileLines.size()-1); // pirmas elementas - pirma eilute.
+        String firstLine = allThisFileLines.get(allThisFileLines.size() - 1); // pirmas elementas - pirma eilute.
         String firstLineElements[] = firstLine.split(","); // pirmos eilutes elementu sarasas.
         return firstLineElements[index];
     }
@@ -115,14 +117,13 @@ public class Write_Read_File {
     }
 
     /**
-     *
-     * @param pathToRead - adresas
-     * @param keyColumnIndex - pagal koki paramera (arba stulpeli) filtruoti, kad issirinkti tinkama eilute is viso failo (pagal ID, kuris dazniausiai bus nulintam stulpelyje)
+     * @param pathToRead            - adresas
+     * @param keyColumnIndex        - pagal koki paramera (arba stulpeli) filtruoti, kad issirinkti tinkama eilute is viso failo (pagal ID, kuris dazniausiai bus nulintam stulpelyje)
      * @param indexOfRequiredColumn - kuriame stulpelyje guli reikalinga reiksme?
-     * @param keyForSpecialLine - pvz kliento ID, kuris bus unikalus ir pagal ji bus galima issirinkti tinkama eilute
+     * @param keyForSpecialLine     - pvz kliento ID, kuris bus unikalus ir pagal ji bus galima issirinkti tinkama eilute
      * @return String reiksme stulpelio ir eilutes susikirtimo reiksme
      */
-    public static String findSomethingInCommonFile(String pathToRead,int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
+    public static String findSomethingInCommonFile(String pathToRead, int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>();
 
@@ -130,15 +131,15 @@ public class Write_Read_File {
             String line[] = allThisFileLines.get(i).split(",");
             ListOfThingtsThatYouAreLookingFor.add(line[keyColumnIndex]);
         }
-        int lineNumber =  ListOfThingtsThatYouAreLookingFor.indexOf(keyForSpecialLine);
+        int lineNumber = ListOfThingtsThatYouAreLookingFor.indexOf(keyForSpecialLine);
         String[] splitedLine = allThisFileLines.get(lineNumber).split(",");
         String answer = splitedLine[indexOfRequiredColumn];
         return answer;
     }
 
-    public static void createDirectory(String pathname){
+    public static void createDirectory(String pathname) {
         File newDirectory = new File(pathname); // kuria FOLDERY.
-        if (!newDirectory.exists()){
+        if (!newDirectory.exists()) {
             boolean check = newDirectory.mkdir();
         }
     }
@@ -166,13 +167,29 @@ public class Write_Read_File {
 
     public static void deleteFile(String pathname) {
         File fileForDelete = new File(pathname);
-        if (fileForDelete.exists()){
+        if (fileForDelete.exists()) {
             boolean check = fileForDelete.delete();
         }
     }
+
     public static void createFile(String clientPath) throws IOException {
         File clientFile = null;
         clientFile = new File(clientPath);
         clientFile.createNewFile();
+    }
+
+    public static List<String> xxxxx (String pathToRead, int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
+        List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
+        List<String> ListOfThingsThatYouAreLookingFor = new ArrayList<>();
+
+        for (int i = 0; i < allThisFileLines.size(); i++) {
+            String line[] = allThisFileLines.get(i).split(",");
+            System.out.println(Arrays.toString(line));
+            if (line[keyColumnIndex].equals(keyForSpecialLine)) {
+                ListOfThingsThatYouAreLookingFor.add(line[indexOfRequiredColumn]);
+                System.out.println(ListOfThingsThatYouAreLookingFor);
+            }
+        }
+        return ListOfThingsThatYouAreLookingFor;
     }
 }

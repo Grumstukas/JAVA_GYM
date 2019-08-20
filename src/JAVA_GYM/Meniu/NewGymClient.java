@@ -24,24 +24,24 @@ public class NewGymClient extends AbstractClient {
      * This method asks of all other parameters that client must have.
      */
     public void takeInfo() {
-        System.out.print("Kuo jus vardu?\t\t\t\t|\t");
+        System.out.print("Kuo jus vardu?\t\t|\t");
         clientName = InputValidation.validateString(ScannerClass.getStringInputValue());
 
         System.out.print("Kokia Jusu pavarde?\t|\t");
         clientSurname = InputValidation.validateString(ScannerClass.getStringInputValue());
 
         System.out.println("Prasau pateikite informacija reikalinga registracijos ivykdymui");
-        System.out.print("telefono numeris: \t\t|\t");
+        System.out.print("telefono numeris: \t|\t");
         InputValidation.validatePhoneNumber(phoneNumber = ScannerClass.getStringInputValue());
 
         System.out.print("elektroninis pastas: \t|\t");
         email = ScannerClass.getStringInputValue();
 //        email = InputValidation.validateString(ScannerClass.getStringInputValue());
 
-        System.out.print("kuno mase (kg): \t\t\t|\t");
+        System.out.print("kuno mase (kg): \t|\t");
         clientWeight = Double.parseDouble(InputValidation.validateDouble(ScannerClass.getStringInputValue()));
 
-        System.out.print("kuno ugis(cm): \t\t\t|\t");
+        System.out.print("kuno ugis(cm): \t\t|\t");
         clientHeight = Double.parseDouble(InputValidation.validateDouble(ScannerClass.getStringInputValue()));
 
         if (!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 4, email)) { // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
@@ -59,7 +59,7 @@ public class NewGymClient extends AbstractClient {
             Write_Read_File.createDirectory("All_Clients\\" + clientID);
             Write_Read_File.writeClientInfoToFile(personalFileHeaders, personalClientInfo, clientPath); // personal
             Write_Read_File.writeClientInfoToFile(personalPaymentFileHeaders, personalPaymentClientInfo, clientPaymentPath); // for payment personal
-            Write_Read_File.writeClientInfoToFile(null, WriteCSS.geretateCSS(),"All_Clients\\" + clientID + "\\main.css");
+            Write_Read_File.writeOtherInfoToClientFileAndDoNotDublicate(WriteCSS.geretateCSS(), "All_Clients\\" + clientID + "\\main.css", "/**StyleFile**/");
 
             System.out.println("Jums suteiktas ID yra   " + clientID + "   " +
                     "\nPrasau issaugokite ji, jo jums prireiks norint ateityje lankyti JAVAGYM sporto kluba :)");
