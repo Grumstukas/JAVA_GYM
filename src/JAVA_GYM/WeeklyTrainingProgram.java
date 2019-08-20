@@ -1,6 +1,6 @@
 package JAVA_GYM;
 
-public enum  WeeklyTrainingProgram {
+public enum WeeklyTrainingProgram {
     MONDAY("CHEST-DAY", "Bench Press", "Incline Press"),
     TUESDAY("BACK-DAY", "Deadlift", "Lat pulldown"),
     WEDNESDAY("SHOULDER-DAY", "Cables and pulleys", "Dumbell lift"),
@@ -20,33 +20,43 @@ public enum  WeeklyTrainingProgram {
         this.machineOne = exerciseOne;
         this.machineTwo = exerciseTwo;
     }
+
     public String getDay() {
         return day;
     }
+
     public String getMachineOne() {
         return machineOne;
     }
+
     public String getMachineTwo() {
         return machineTwo;
     }
+
     public void setDay(String day) {
         this.day = day;
     }
+
     public void setMachineOne(String machineOne) {
         this.machineOne = machineOne;
     }
+
     public void setMachineTwo(String machineTwo) {
         this.machineTwo = machineTwo;
     }
+
     public String getMuscleGrowthTraining() {
         return muscleGrowthTraining;
     }
+
     public String getBalancedTraining() {
         return balancedTraining;
     }
+
     public void setMuscleGrowthTraining(String muscleGrowthTraining) {
         this.muscleGrowthTraining = muscleGrowthTraining;
     }
+
     public void setBalancedTraining(String balancedTraining) {
         this.balancedTraining = balancedTraining;
     }

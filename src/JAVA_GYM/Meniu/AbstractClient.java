@@ -57,12 +57,12 @@ public abstract class AbstractClient {
     }
 
     public void setClientName(String clientName) {
-        if (clientName.equals("") & clientName == null) {
+        if ( clientName.equals("") & clientName == null ) {
             System.out.println("Name must contain letters a-z.");
         } else {
             this.clientName = clientName;
         }
-        if (clientName.length() > 20) {
+        if ( clientName.length() > 20 ) {
             System.out.println("Name must contain not more than 20 letters");
         } else {
             this.clientName = clientName;
@@ -70,12 +70,12 @@ public abstract class AbstractClient {
     }
 
     public void setClientSurname(String clientSurname) {
-        if (clientSurname.equals("") & clientSurname == null) {
+        if ( clientSurname.equals("") & clientSurname == null ) {
             System.out.println("Name must contain letters a-z.");
         } else {
             this.clientSurname = clientSurname;
         }
-        if (clientSurname.length() > 20) {
+        if ( clientSurname.length() > 20 ) {
             System.out.println("Name must contain not more than 20 letters");
         } else {
             this.clientSurname = clientSurname;
@@ -87,16 +87,15 @@ public abstract class AbstractClient {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (String.valueOf(phoneNumber).length() != 8)
-        {
+        if ( String.valueOf(phoneNumber).length() != 8 ) {
             System.out.println("Rest of the phone number must contain 8 numbers.");
-        } else{
+        } else {
             this.phoneNumber = phoneNumber;
         }
     }
 
     public void setClientWeight(double clientWeight) {
-        if (clientWeight > 200 || clientWeight < 20) {
+        if ( clientWeight > 200 || clientWeight < 20 ) {
             System.out.println("Please enter a valid weight.");
         } else {
             this.clientWeight = clientWeight;
@@ -104,7 +103,7 @@ public abstract class AbstractClient {
     }
 
     public void setClientHeight(double clientHeight) {
-        if (clientHeight > 250 || clientHeight < 50) {
+        if ( clientHeight > 250 || clientHeight < 50 ) {
             System.out.println("Please enter a valid height.");
         } else {
             this.clientHeight = clientHeight;

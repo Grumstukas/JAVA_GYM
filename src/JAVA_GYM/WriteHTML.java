@@ -16,7 +16,7 @@ public class WriteHTML {
                 "</head>\n" +
                 "<body>\n" +
                 "<header>\n" +
-                "    Kliento "+ClientID+" "+change+" pokytis nuo "+dateFrom+" iki "+dateTo+":\n" +
+                "    Kliento " + ClientID + " " + change + " pokytis nuo " + dateFrom + " iki " + dateTo + ":\n" +
                 "</header>\n" +
                 "<img src=\"../../javaGymLogo.png\" alt=\"\">\n" +
                 "<div class=\"body\">\n";
@@ -26,7 +26,7 @@ public class WriteHTML {
 
         List<Double> double_parameters = StringListToIntegerList(parameters);
         double biggestValue = Collections.max(double_parameters);
-        double lowestValue = Collections.min(double_parameters)-5;
+        double lowestValue = Collections.min(double_parameters) - 5;
 
         int left1 = 0;
         int left2 = -20;
@@ -34,30 +34,30 @@ public class WriteHTML {
         StringBuilder html_body1 = new StringBuilder();
         StringBuilder html_body2 = new StringBuilder();
 
-        for (int i = 0; i<parameters.size(); i++){
-            html_body1.append("<div class=\"weight\" style=\"left: "+left1+"px; font-size:"+fontSize+"px;" +
-                    "height: "+(((double_parameters.get(i)-lowestValue)*68)/(biggestValue-lowestValue))+"vh;\">"+parameters.get(i)+"<br>"+unit+"</div>\n");
-            html_body2.append("<div class=\"dates\" style=\"left: "+left2+"px;\">"+selectedDates.get(i)+"</div>");
+        for ( int i = 0; i < parameters.size(); i++ ) {
+            html_body1.append("<div class=\"weight\" style=\"left: " + left1 + "px; font-size:" + fontSize + "px;" +
+                    "height: " + (((double_parameters.get(i) - lowestValue) * 68) / (biggestValue - lowestValue)) + "vh;\">" + parameters.get(i) + "<br>" + unit + "</div>\n");
+            html_body2.append("<div class=\"dates\" style=\"left: " + left2 + "px;\">" + selectedDates.get(i) + "</div>");
 
-            left1+=50;
-            left2+=50;
+            left1 += 50;
+            left2 += 50;
         }
 
         String html_body1_ending = "</div>\n";
         String html_body2_ending = "</div>\n";
 
-        String html_ending ="</div>\n</body>\n</html>";
+        String html_ending = "</div>\n</body>\n</html>";
 
-        String fullHTML = html_begining+
-                                        html_body1_begining+html_body1+html_body1_ending+
-                                        html_body2_begining+ html_body2+html_body2_ending+
-                                        html_ending;
+        String fullHTML = html_begining +
+                html_body1_begining + html_body1 + html_body1_ending +
+                html_body2_begining + html_body2 + html_body2_ending +
+                html_ending;
         return fullHTML;
     }
 
-    private static List<Double> StringListToIntegerList(List<String>stringList){
+    private static List<Double> StringListToIntegerList(List<String> stringList) {
         List<Double> double_parameters = new ArrayList<>();
-        for(String s : stringList) double_parameters.add(Double.valueOf(s));
+        for ( String s : stringList ) double_parameters.add(Double.valueOf(s));
         return double_parameters;
     }
 }

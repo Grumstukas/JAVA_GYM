@@ -1,7 +1,7 @@
 package JAVA_GYM;
 
 public class WriteCSS {
-    public static String geretateCSS(){
+    public static String geretateCSS() {
 
         String mainCSS = "/**StyleFile**/\n" +
                 "body,\n" +

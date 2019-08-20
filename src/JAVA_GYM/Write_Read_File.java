@@ -21,12 +21,12 @@ public class Write_Read_File {
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
             clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
 
-            if (readFile(clientPath, clientInfo) == 0) { //jeigu failas - tuscias
+            if ( readFile(clientPath, clientInfo) == 0 ) { //jeigu failas - tuscias
                 registration.println(headers); //irsaso header eilute
                 registration.println(clientInfo); //irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }
-            if (readFile(clientPath, clientInfo) == 1) { //jeigu failas - sukurtas ir netuscias
+            if ( readFile(clientPath, clientInfo) == 1 ) { //jeigu failas - sukurtas ir netuscias
                 registration.println(clientInfo);//irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }
@@ -46,10 +46,10 @@ public class Write_Read_File {
         int newLineInClientBook = 0; // praso iniciavimo, tik del to FALSE.
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
 
-        for (int i = 0; i < allThisFileLines.size(); i++) { // iteruojasi per visas eilutes (viena eilute - vienas elementas)
-            if (allThisFileLines.size() == 0) {
+        for ( int i = 0; i < allThisFileLines.size(); i++ ) { // iteruojasi per visas eilutes (viena eilute - vienas elementas)
+            if ( allThisFileLines.size() == 0 ) {
                 newLineInClientBook = 0; // jeigu esi tuscias, tai ok as irasysiu papildoma eilute.
-            } else if (!allThisFileLines.contains(clientInfo)) { // jeigu ne tuscias "!", klausiu ar neturi jau tokio pacio "contains".
+            } else if ( !allThisFileLines.contains(clientInfo) ) { // jeigu ne tuscias "!", klausiu ar neturi jau tokio pacio "contains".
                 newLineInClientBook = 1; // jeigu turi(contains), tai neirasau.
             } else {
                 newLineInClientBook = 2;
@@ -92,11 +92,11 @@ public class Write_Read_File {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>(); // busimas ieskomu elementu sarasas.
 
-        for (int i = 0; i < allThisFileLines.size(); i++) { // iteruoja per visa sudarytu eiluciu sarasa.
+        for ( int i = 0; i < allThisFileLines.size(); i++ ) { // iteruoja per visa sudarytu eiluciu sarasa.
             String line[] = allThisFileLines.get(i).split(","); // sukuria po nauja masyva kikevienai eilutei.
             ListOfThingtsThatYouAreLookingFor.add(line[index]); // is kiekvienos eilutes masyvo ima konkrecia reiksme "index" ir talpina i nauja ieskomu elementu sarasa.
         }
-        if (ListOfThingtsThatYouAreLookingFor.size() > 0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething)) { // tikrina ar ne tusias '&' iesko ar jau yra ieskomas elementas.
+        if ( ListOfThingtsThatYouAreLookingFor.size() > 0 & ListOfThingtsThatYouAreLookingFor.contains(thatSomething) ) { // tikrina ar ne tusias '&' iesko ar jau yra ieskomas elementas.
             found = true;
         } else {
             found = false;
@@ -107,7 +107,7 @@ public class Write_Read_File {
     public static List<String> readAllGivenFileLinesAndReturnListOfAllLines(String pathToRead) {
         List<String> allThisFileLines = new ArrayList<String>(); // sukuria failo eiluciu sarasa.
         try (Scanner scanner = new Scanner(new File(pathToRead))) { //skaito nurodyta faila
-            while (scanner.hasNextLine()) { // kol randa ka skaityti tol irasineja failo eilutes i sarasa.
+            while ( scanner.hasNextLine() ) { // kol randa ka skaityti tol irasineja failo eilutes i sarasa.
                 allThisFileLines.add(scanner.nextLine());
             }
         } catch (IOException ex) {
@@ -118,16 +118,18 @@ public class Write_Read_File {
 
     /**
      * @param pathToRead            - adresas
-     * @param keyColumnIndex        - pagal koki paramera (arba stulpeli) filtruoti, kad issirinkti tinkama eilute is viso failo (pagal ID, kuris dazniausiai bus nulintam stulpelyje)
+     * @param keyColumnIndex        - pagal koki paramera (arba stulpeli) filtruoti, kad issirinkti tinkama eilute is
+     *                              viso failo (pagal ID, kuris dazniausiai bus nulintam stulpelyje)
      * @param indexOfRequiredColumn - kuriame stulpelyje guli reikalinga reiksme?
-     * @param keyForSpecialLine     - pvz kliento ID, kuris bus unikalus ir pagal ji bus galima issirinkti tinkama eilute
+     * @param keyForSpecialLine     - pvz kliento ID, kuris bus unikalus ir pagal ji bus galima issirinkti tinkama
+     *                              eilute
      * @return String reiksme stulpelio ir eilutes susikirtimo reiksme
      */
     public static String findSomethingInCommonFile(String pathToRead, int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingtsThatYouAreLookingFor = new ArrayList<>();
 
-        for (int i = 0; i < allThisFileLines.size(); i++) {
+        for ( int i = 0; i < allThisFileLines.size(); i++ ) {
             String line[] = allThisFileLines.get(i).split(",");
             ListOfThingtsThatYouAreLookingFor.add(line[keyColumnIndex]);
         }
@@ -139,7 +141,7 @@ public class Write_Read_File {
 
     public static void createDirectory(String pathname) {
         File newDirectory = new File(pathname); // kuria FOLDERY.
-        if (!newDirectory.exists()) {
+        if ( !newDirectory.exists() ) {
             boolean check = newDirectory.mkdir();
         }
     }
@@ -152,11 +154,11 @@ public class Write_Read_File {
             clientFile = new File(clientPath); // sukuria objekta, kuris moka skaityti asmenini faila (clientPath)
             clientFile.createNewFile(); // default metodas sukurti faila, jeigu tokio nera
 
-            if (readFile(clientPath, doNotRepeatString) == 0) { //jeigu failas - tuscias
+            if ( readFile(clientPath, doNotRepeatString) == 0 ) { //jeigu failas - tuscias
                 registration.println(clientInfo); //irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }
-            if (readFile(clientPath, doNotRepeatString) == 1) { //jeigu failas - sukurtas ir netuscias
+            if ( readFile(clientPath, doNotRepeatString) == 1 ) { //jeigu failas - sukurtas ir netuscias
                 registration.println(clientInfo);//irsaso kliento informacijos eilute
                 registration.flush(); // nuleido
             }
@@ -167,7 +169,7 @@ public class Write_Read_File {
 
     public static void deleteFile(String pathname) {
         File fileForDelete = new File(pathname);
-        if (fileForDelete.exists()) {
+        if ( fileForDelete.exists() ) {
             boolean check = fileForDelete.delete();
         }
     }
@@ -178,14 +180,14 @@ public class Write_Read_File {
         clientFile.createNewFile();
     }
 
-    public static List<String> xxxxx (String pathToRead, int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
+    public static List<String> xxxxx(String pathToRead, int keyColumnIndex, int indexOfRequiredColumn, String keyForSpecialLine) {
         List<String> allThisFileLines = readAllGivenFileLinesAndReturnListOfAllLines(pathToRead);
         List<String> ListOfThingsThatYouAreLookingFor = new ArrayList<>();
 
-        for (int i = 0; i < allThisFileLines.size(); i++) {
+        for ( int i = 0; i < allThisFileLines.size(); i++ ) {
             String line[] = allThisFileLines.get(i).split(",");
             System.out.println(Arrays.toString(line));
-            if (line[keyColumnIndex].equals(keyForSpecialLine)) {
+            if ( line[keyColumnIndex].equals(keyForSpecialLine) ) {
                 ListOfThingsThatYouAreLookingFor.add(line[indexOfRequiredColumn]);
                 System.out.println(ListOfThingsThatYouAreLookingFor);
             }

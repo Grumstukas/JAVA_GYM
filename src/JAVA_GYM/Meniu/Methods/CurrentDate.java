@@ -9,7 +9,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class CurrentDate {
-    public static String[] currentTime(){
+    public static String[] currentTime() {
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter nowDate = DateTimeFormatter.ofPattern("dd-MM-yy");
         DateTimeFormatter nowTime = DateTimeFormatter.ofPattern("HH:mm");
@@ -26,6 +26,7 @@ public class CurrentDate {
                 .toLocalDate();
         return date;
     }
+
     public static String dateToString(LocalDate date) {
         DateTimeFormatter nowDate = DateTimeFormatter.ofPattern("dd-MM-yy");
         String stringDate = date.format(nowDate);

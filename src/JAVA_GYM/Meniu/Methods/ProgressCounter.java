@@ -40,12 +40,12 @@ public class ProgressCounter {
         String header = "";
         String filePath = "";
         String unit = "";
-        if (parameterName.equals("weight")){
+        if ( parameterName.equals("weight") ) {
             header = "Data \t\t\t\t svoris\n-------------------------";
             filePath = "All_Clients\\" + ClientID + "\\" + ClientID + "_weight.html";
             unit = " kg";
             Write_Read_File.deleteFile(filePath);
-        }else if (parameterName.equals("bmi")){
+        } else if ( parameterName.equals("bmi") ) {
             header = "Data \t\t\t\t BMI indeksas\n-------------------------";
             filePath = "All_Clients\\" + ClientID + "\\" + ClientID + "_BMI.html";
             unit = "";
@@ -53,8 +53,8 @@ public class ProgressCounter {
         }
 
         System.out.println(header);
-        for (int i = 0; i<selectedDates.size();i++){
-            System.out.println(selectedDates.get(i)+"\t|\t"+parameters.get(i)+unit);
+        for ( int i = 0; i < selectedDates.size(); i++ ) {
+            System.out.println(selectedDates.get(i) + "\t|\t" + parameters.get(i) + unit);
         }
 
         String clientHTML = WriteHTML.geretateHTML(
@@ -78,17 +78,17 @@ public class ProgressCounter {
         List<String> selectedDates = new ArrayList<>();
         List<String> parameters = new ArrayList<>();
 
-        for (LocalDate date = dateFrom; date.isBefore(dateTo.plusDays(1)); date = date.plusDays(1)) {
+        for ( LocalDate date = dateFrom; date.isBefore(dateTo.plusDays(1)); date = date.plusDays(1) ) {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             selectedDates.add(date.format(df));
             parameters.add(Write_Read_File.findSomethingInCommonFile(
-                    "All_Clients\\" + ClientID + "\\" + ClientID +".csv",
+                    "All_Clients\\" + ClientID + "\\" + ClientID + ".csv",
                     1,
                     parameterColumn,
                     dateToString(date)));
         }
-        listArray[0]=selectedDates;
-        listArray[1]=parameters;
+        listArray[0] = selectedDates;
+        listArray[1] = parameters;
         return listArray;
     }
 

@@ -9,10 +9,12 @@ public class ID_Generator {
         String id = a.toUpperCase().substring(0, 1) + "" + b.toUpperCase().substring(0, 1) + "" + number;
         this.id = id;
     }
+
     private static int randomNumber() {
         int random = (int) Math.floor(Math.random() * 899) + 100;
         return random;
     }
+
     public String getId() {
         return id;
     }

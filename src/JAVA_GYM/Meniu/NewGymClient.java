@@ -44,7 +44,7 @@ public class NewGymClient extends AbstractClient {
         System.out.print("kuno ugis(cm): \t\t|\t");
         clientHeight = Double.parseDouble(InputValidation.validateDouble(ScannerClass.getStringInputValue()));
 
-        if (!Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 4, email)) { // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
+        if ( !Write_Read_File.findSomethingInAllFile("All_Clients\\All.csv", 4, email) ) { // 8 vieta eiluteje, kur yra emailas, kuri tikrina ar nesikartoja
             setClientID(new ID_Generator(getClientName(), getClientSurname()).getId());
             setClientBMI(new BMICalc(getClientWeight(), getClientHeight()).getBMI()); // FALSE, tesia registracija, skaiciuoja BMI
 

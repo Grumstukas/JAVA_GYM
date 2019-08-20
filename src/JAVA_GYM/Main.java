@@ -12,8 +12,8 @@ import java.text.ParseException;
 public class Main {
 
     /**
-     * First JavaGym registration pop-up, demands to choose an option.
-     * Depending on chosen option this method call second further "registration" or "existing user" method.
+     * First JavaGym registration pop-up, demands to choose an option. Depending on chosen option this method call
+     * second further "registration" or "existing user" method.
      *
      * @author Angry Code Bat
      */
@@ -25,16 +25,16 @@ public class Main {
         System.out.println("1. Spauskite ' 1 ' jeigu norite uzsiregistruoti");
         System.out.println("2. Spauskite ' 2 ' jeigu Jums jau suteiktas prisijungimo ID");
         String userInput = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
-        switch (userInput) {
+        switch ( userInput ) {
 
             case "1":
                 NewGymClient clientNew = new NewGymClient();
                 clientNew.takeInfo();
                 System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)\n jeigu nenorite : (spauskite 2)");
                 String option2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
-                if (option2.equals("1")) {
+                if ( option2.equals("1") ) {
                     GymPrograms.chooseProgram(clientNew.getClientID());
-                } else if (option2.equals("2")){
+                } else if ( option2.equals("2") ) {
                     break;
                 }
 
@@ -52,15 +52,15 @@ public class Main {
                     System.out.println("4. Press ' 4 ' atsiskaitymas uz treniruotes");
                     System.out.println("5. Press ' 5 ' Aciu, viso gero!");
                     String userInput2 = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "5");
-                    switch (userInput2) {
+                    switch ( userInput2 ) {
                         case "1":
                             OldGymClient clientOld = new OldGymClient(userID);
                             clientOld.updateInfo();
                             System.out.println("Gal norite gauti savaitine specialai Jums balansuota programa? (spauskite 1)\n jeigu nenorite : (spauskite 2)");
                             String option = InputValidation.isThisChoiceValid(ScannerClass.getStringInputValue(), "2");
-                            if (option.equals("1")) {
+                            if ( option.equals("1") ) {
                                 GymPrograms.chooseProgram(userID);
-                            } else if (option.equals("2")){
+                            } else if ( option.equals("2") ) {
                                 break;
                             }
                             stop = 1;
@@ -83,7 +83,7 @@ public class Main {
                         default:
                             System.out.println("Aciu, kad sportuojate JavaGym !");
                     }
-                } while (stop == 1);
+                } while ( stop == 1 );
 
             default:
                 System.out.println("Aciu, kad sportuojate JavaGym !");
